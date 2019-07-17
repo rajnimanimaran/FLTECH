@@ -1,0 +1,328 @@
+<div class="container-fluid bg1">
+  <div class="row">
+    <div class="col-sm-12" id="responsive">
+      <div class="new" id="center">
+        <div class="card" id="mainbox">
+
+          <div class="card-body" *ngIf="!editFlag">
+            <div class="row">
+              <div class="col-sm-6" style="padding-top:5px">
+                <h6 id="h1">Quality Control
+                  <span id="h1s">List</span>
+                </h6>
+              </div>
+              <div class="col-sm-6" style="text-align: right;margin-top:-5px;">
+                <button id="new" mat-mini-fab>
+                  <i class="material-icons" (click)="addQc()" matTooltip="Add UOM"
+                    style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
+                    add
+                  </i>
+                </button>&nbsp;
+                <button id="cancel" mat-mini-fab>
+                  <i class="material-icons" matTooltip="Exit The Page"
+                    style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
+                    clear
+                  </i>
+                </button>
+              </div>
+            </div>
+
+            <hr style="margin-top:0.5rem">
+            <div class="table-container mat-elevation-z2">
+              <mat-table class="color-table" #table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="SNo">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                    SNo
+                    <button mat-icon-button [matMenuTriggerFor]="SNoFilter" class="Filter-icon-WT">
+                      <mat-icon aria-label="SNo Filter">keyboard_arrow_down</mat-icon>
+                    </button>
+                    <mat-menu #SNoFilter="matMenu" yPosition="below" [overlapTrigger]="false" xPosition="before">
+                      <div class="info-wrapper menuPop">
+                        <mat-form-field class="w-100 input-label">
+                          <input matInput placeholder="Search SNo" (click)="handleClick($event)"
+                            (keyup)="applyFilter($event.target.value)" autofocus>
+                        </mat-form-field>
+                        <div class="ta-w">
+                          <button mat-mini-fab color="warn" class="satPop-ok">
+                            <mat-icon aria-label="Close">close</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </mat-menu>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let data;let i= index"> {{i+1}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="QCCode">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                    QualityCode
+                    <button mat-icon-button [matMenuTriggerFor]="QualityCodeFilter" class="Filter-icon-WT">
+                      <mat-icon aria-label="Area Filter">keyboard_arrow_down</mat-icon>
+                    </button>
+                    <mat-menu #QualityCodeFilter="matMenu" yPosition="below" [overlapTrigger]="false"
+                      xPosition="before">
+                      <div class="info-wrapper menuPop">
+                        <mat-form-field class="w-100 input-label">
+                          <input matInput placeholder="Search QualityCode." (click)="handleClick($event)"
+                            (keyup)="applyFilter($event.target.value)" autofocus>
+                        </mat-form-field>
+                        <div class="ta-w">
+                          <button mat-mini-fab color="warn" class="satPop-ok">
+                            <mat-icon aria-label="Close">close</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </mat-menu>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let data">{{data.QCCode}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="QCName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                    QualityName
+                    <button mat-icon-button [matMenuTriggerFor]="QualityNameFilter" class="Filter-icon-WT">
+                      <mat-icon aria-label="Area Filter">keyboard_arrow_down</mat-icon>
+                    </button>
+                    <mat-menu #QualityNameFilter="matMenu" yPosition="below" [overlapTrigger]="false"
+                      xPosition="before">
+                      <div class="info-wrapper menuPop">
+                        <mat-form-field class="w-100 input-label">
+                          <input matInput placeholder="Search QualityName." (click)="handleClick($event)"
+                            (keyup)="applyFilter($event.target.value)" autofocus>
+                        </mat-form-field>
+                        <div class="ta-w">
+                          <button mat-mini-fab color="warn" class="satPop-ok">
+                            <mat-icon aria-label="Close">close</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </mat-menu>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let data"> {{data.QCName}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="prdName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                    ProductName
+                    <button mat-icon-button [matMenuTriggerFor]="ProductNameFilter" class="Filter-icon-WT">
+                      <mat-icon aria-label="Area Filter">keyboard_arrow_down</mat-icon>
+                    </button>
+                    <mat-menu #ProductNameFilter="matMenu" yPosition="below" [overlapTrigger]="false"
+                      xPosition="before">
+                      <div class="info-wrapper menuPop">
+                        <mat-form-field class="w-100 input-label">
+                          <input matInput placeholder="Search UOM." (click)="handleClick($event)"
+                            (keyup)="applyFilter($event.target.value)" autofocus>
+                        </mat-form-field>
+                        <div class="ta-w">
+                          <button mat-mini-fab color="ProdName" class="satPop-ok">
+                            <mat-icon aria-label="Close">close</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </mat-menu>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let data"> {{data.prdName}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Action">
+                  <mat-header-cell *matHeaderCellDef class="color-white">Action</mat-header-cell>
+                  <mat-cell *matCellDef="let data">{{data.action}}
+                    <button mat-icon-button color="primary" matTooltip="Edit This Row" [matTooltipClass]="'custom-tip'">
+                      <mat-icon aria-label="Edit Row" (click)="UpdateQuality(data,true)" class="f-18">
+                        edit
+                      </mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" matTooltip="Delete This Row" [matTooltipClass]="'custom-tip'">
+                      <i class="material-icons" style="color: green" (click)="openQcDetails(data)">
+                        remove_red_eye
+                      </i>
+                      <!-- <mat-icon aria-label="Add" class="f-18" (click)="openQcDetails(data)">view</mat-icon> -->
+                    </button>
+                  </mat-cell>
+                </ng-container>
+
+
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;let i=index" (click)="selection.toggle(row)">
+                </mat-row>
+
+              </mat-table>
+
+              <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+              </mat-paginator>
+
+            </div>
+
+          </div>
+          <app-spinner [showProgress]='!isLoading'></app-spinner>
+
+          <div *ngIf="editFlag" class="card-body">
+            <form [formGroup]="QCForm">
+              <div class="row">
+                <div class="col-sm-6" style="padding-top:5px">
+                  <h6 id="h1">Quality Control
+                    <span id="h1s">New</span>
+                  </h6>
+                </div>
+                <div class="col-sm-6" style="text-align: right;margin-top:-5px;">
+                  <button id="new" mat-mini-fab>
+                    <i class="material-icons" (click)="backQCListForm()" matTooltip="Exit The Page"
+                      style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
+                      list
+                    </i>
+                  </button>&nbsp;
+                  <button id="cancel" mat-mini-fab (click)="backQCListForm()">
+                    <i class="material-icons" matTooltip="Exit The Page"
+                      style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
+                      clear
+                    </i>
+                  </button>
+                </div>
+              </div>
+              <hr style="margin-top:0.5rem">
+
+              <div class="p-24 ">
+                <div fxLayout="column" fxLayoutAlign="start start " fxLayoutGap="15px">
+                  <div fxLayout="row" fxLayoutGap="10px">
+                    <div>
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="QualityCode" [(ngModel)]="model.QCCode" formControlName="Code"
+                          required>
+                        <mat-error> QualityCode required</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div>
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="QualityName" [(ngModel)]="model.QCName" formControlName="Name"
+                          required>
+                        <mat-error> QualityName required</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div>
+                      <mat-form-field class="example-full-width">
+                        <mat-select placeholder="ProductName" [(ngModel)]="model.PrdID" formControlName="ProductName">
+                          <mat-option *ngFor="let ddval of product" [value]="ddval.prdID">{{ddval.prdName}}</mat-option>
+                        </mat-select>
+                        <mat-error> ProductName required</mat-error>
+                      </mat-form-field>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </form>
+
+            <mat-card class="newgrid-card">
+              <div class="col-sm-6" style="padding-top:5px">
+                <h6 id="h1">Quality Check List
+                </h6>
+              </div>
+              <hr style="margin-top:0.5rem">
+              <div class="row">
+                <div class="col-sm-4">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="CheckName" [(ngModel)]="model1.ChkName" name="ChkName" required>
+                    <mat-error> CheckName required</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-4">
+                  <button *ngIf="!checkFlag" mat-raised-button color="primary" (click)="addQCField(model1)"
+                    [disabled]="model1.ChkName == undefined || model1.ChkName == ''">
+                    <mat-icon> add </mat-icon> ROW
+                  </button>
+                  <button *ngIf="checkFlag" mat-raised-button color="primary" (click)="addQCField(model1)">
+                    <i class="material-icons">add</i>&nbsp;Update
+                  </button>
+                </div>
+              </div>
+
+              <div class="newgrid">
+                <mat-table table [dataSource]="datasourceone" class="mat-elevation-z8">
+                  <ng-container matColumnDef="SNo">
+                    <mat-header-cell *matHeaderCellDef style="text-align: center;"> SNo </mat-header-cell>
+                    <mat-cell *matCellDef="let QCdetails;let i =index" style="text-align: center;"> {{i+1}} </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="ChkName">
+                    <mat-header-cell *matHeaderCellDef> CheckName </mat-header-cell>
+                    <mat-cell *matCellDef="let QCdetails: let i =index"> {{QCdetails.ChkName}} </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="Action">
+                    <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                    <mat-cell *matCellDef="let QCdetails: let i =index"> {{QCdetails.Action}}
+                      <button mat-icon-button color="primary" matTooltip="Edit This Row"
+                        [matTooltipClass]="'custom-tip'">
+                        <mat-icon aria-label="Edit Row" (click)="updateQCLdetails(QCdetails,true,i)" class="f-18">
+                          edit
+                        </mat-icon>
+                      </button>
+                      <button mat-icon-button color="warn" matTooltip="Delete This Row"
+                        [matTooltipClass]="'custom-tip'">
+                        <mat-icon aria-label="Add" class="f-18" (click)="deleteQCLdetails(i)">delete</mat-icon>
+                      </button>
+                    </mat-cell>
+                  </ng-container>
+                  <mat-header-row *matHeaderRowDef="displayeNewGrid"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayeNewGrid;"></mat-row>
+                </mat-table>
+
+              </div>
+
+              <div class="buttons" fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px">
+                <div>
+                  <button (click)="saveQuality()" mat-raised-button color="primary">Save</button>
+                </div>
+                <div>
+                  <button (click)="backQCListForm()" mat-raised-button color="warn">Close</button>
+                </div>
+              </div>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #qCDialog>
+    <div class="w-100">
+      <mat-toolbar color="primary" fxLayoutAlign="space-between center">
+        <span>Quality Control Details </span>
+        <button mat-icon-button>
+          <mat-icon (click)="closeDialog()">close
+          </mat-icon>
+        </button>
+      </mat-toolbar>
+    </div>
+    <div class="p-24">
+      <p>Quality Code: <span style="font-size: 12px;font-weight: 300">{{datavalue.QCCode}} </span></p>
+     
+      <p>Quality Name: <span style="font-size: 12px;font-weight: 300"> {{datavalue.QCName}}</span></p>
+     
+      <p>Product Name: <span style="font-size: 12px;font-weight: 300"> {{datavalue.prdName}} </span></p>
+    
+
+      <table class="table table-bordered">
+        <thead>
+          <tr style="font-weight: 600">
+            <th style="width:3%">S.No</th>
+            <th>Check List</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let check of QCdetails;let i=index">
+            <td style="width:3%;font-size: 14px;">{{i+1}}</td>
+            <td  style="font-size: 14px;">{{check.ChkName}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+        <div style="margin-right: 5px;margin-bottom: 5px;text-align: end">
+          <button (click)="closeDialog()" mat-raised-button color="warn">Close</button>
+   <div></div>     
+      </div>
+
+  </ng-template>

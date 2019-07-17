@@ -1,0 +1,331 @@
+<div class="container-fluid bg1">
+  <div class="row">
+    <div class="col-sm-12" id="responsive">
+      <div class="new" id="center">
+        <div class="card" id="mainbox">
+          <div *ngIf="!show" class="card-body">
+            <div class="row">
+              <div class="col-sm-6" style="padding-top:5px">
+                <h6 id="h1">Bill of Material
+                  <span id="h1s">List</span>
+                </h6>
+              </div>
+              <div class="col-sm-6" style="text-align: right;margin-top:-5px;">
+                <button id="new" mat-mini-fab>
+                  <i class="material-icons" (click)="addBom()" matTooltip="Add UOM"
+                    style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
+                    add
+                  </i>
+                </button>&nbsp;
+                <button id="cancel" mat-mini-fab>
+                  <i class="material-icons" matTooltip="Exit The Page"
+                    style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
+                    clear
+                  </i>
+                </button>
+              </div>
+            </div>
+            <hr style="margin-top:0.5rem">
+
+
+            <div class="table-container mat-elevation-z2">
+              <mat-table class="color-table" #table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="SNo">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                    SNo
+                    <button mat-icon-button [matMenuTriggerFor]="SNoFilter" class="Filter-icon-WT">
+                      <mat-icon aria-label="SNo Filter">keyboard_arrow_down</mat-icon>
+                    </button>
+                    <mat-menu #SNoFilter="matMenu" yPosition="below" [overlapTrigger]="false" xPosition="before">
+                      <div class="info-wrapper menuPop">
+                        <mat-form-field class="w-100 input-label">
+                          <input matInput placeholder="Search SNo" (click)="handleClick($event)"
+                            (keyup)="applyFilter($event.target.value)" autofocus>
+                        </mat-form-field>
+                        <div class="ta-w">
+                          <button mat-mini-fab color="warn" class="satPop-ok">
+                            <mat-icon aria-label="Close">close</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </mat-menu>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let listarea;let i= index"> {{i+1}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="BOMCode">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                    BOMCode
+                    <button mat-icon-button [matMenuTriggerFor]="BOMFilter" class="Filter-icon-WT">
+                      <mat-icon aria-label="Area Filter">keyboard_arrow_down</mat-icon>
+                    </button>
+                    <mat-menu #BOMCodeFilter="matMenu" yPosition="below" [overlapTrigger]="false" xPosition="before">
+                      <div class="info-wrapper menuPop">
+                        <mat-form-field class="w-100 input-label">
+                          <input matInput placeholder="Search BOMCode." (click)="handleClick($event)"
+                            (keyup)="applyFilter($event.target.value)" autofocus>
+                        </mat-form-field>
+                        <div class="ta-w">
+                          <button mat-mini-fab color="warn" class="satPop-ok">
+                            <mat-icon aria-label="Close">close</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </mat-menu>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let data"> {{data.BOMCode}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="BOMName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                    BOMName
+                    <button mat-icon-button [matMenuTriggerFor]="BOMNameFilter" class="Filter-icon-WT">
+                      <mat-icon aria-label="Area Filter">keyboard_arrow_down</mat-icon>
+                    </button>
+                    <mat-menu #BOMNameFilter="matMenu" yPosition="below" [overlapTrigger]="false" xPosition="before">
+                      <div class="info-wrapper menuPop">
+                        <mat-form-field class="w-100 input-label">
+                          <input matInput placeholder="Search BOMName." (click)="handleClick($event)"
+                            (keyup)="applyFilter($event.target.value)" autofocus>
+                        </mat-form-field>
+                        <div class="ta-w">
+                          <button mat-mini-fab color="warn" class="satPop-ok">
+                            <mat-icon aria-label="Close">close</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </mat-menu>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let data"> {{data.BOMName}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Product">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                    Product
+                    <button mat-icon-button [matMenuTriggerFor]="StockFilter" class="Filter-icon-WT">
+                      <mat-icon aria-label="Area Filter">keyboard_arrow_down</mat-icon>
+                    </button>
+                    <mat-menu #ProductFilter="matMenu" yPosition="below" [overlapTrigger]="false" xPosition="before">
+                      <div class="info-wrapper menuPop">
+                        <mat-form-field class="w-100 input-label">
+                          <input matInput placeholder="Search Product." (click)="handleClick($event)"
+                            (keyup)="applyFilter($event.target.value)" autofocus>
+                        </mat-form-field>
+                        <div class="ta-w">
+                          <button mat-mini-fab color="warn" class="satPop-ok">
+                            <mat-icon aria-label="Close">close</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </mat-menu>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let data">{{data.prdName}} </mat-cell>
+                </ng-container>
+ 
+                <ng-container matColumnDef="UOM">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                    UOM
+                    <button mat-icon-button [matMenuTriggerFor]="UOMFilter" class="Filter-icon-WT">
+                      <mat-icon aria-label="Area Filter">keyboard_arrow_down</mat-icon>
+                    </button>
+                    <mat-menu #UOMFilter="matMenu" yPosition="below" [overlapTrigger]="false" xPosition="before">
+                      <div class="info-wrapper menuPop">
+                        <mat-form-field class="w-100 input-label">
+                          <input matInput placeholder="Search UOMId." (click)="handleClick($event)"
+                            (keyup)="applyFilter($event.target.value)" autofocus>
+                        </mat-form-field>
+                        <div class="ta-w">
+                          <button mat-mini-fab color="warn" class="satPop-ok">
+                            <mat-icon aria-label="Close">close</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </mat-menu>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let data">{{data.UOMName}} </mat-cell>
+                </ng-container>
+
+
+                <ng-container matColumnDef="action">
+                  <mat-header-cell *matHeaderCellDef class="color-white">Action</mat-header-cell>
+                  <mat-cell *matCellDef="let data">{{data.action}}
+                    <button mat-icon-button color="primary" matTooltip="Edit This Row" [matTooltipClass]="'custom-tip'">
+                      <mat-icon aria-label="Edit Row" (click)="updateBOMMaster(data)" class="f-18">
+                        edit
+                      </mat-icon>
+                    </button>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;let i=index" (click)="selection.toggle(row)">
+                </mat-row>
+              </mat-table>
+
+              <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+              </mat-paginator>
+            </div>
+
+
+           
+          </div>
+          <div *ngIf="show"  class="card-body">
+              <form [formGroup]="BomForm">
+                <div class="row">
+                  <div class="col-sm-6" style="padding-top:5px">
+                    <h6 id="h1">BOM
+                      <span id="h1s">New</span>
+                    </h6>
+                  </div>
+                  <div class="col-sm-6" style="text-align: right;margin-top:-5px;">
+                    <button id="new" mat-mini-fab>
+                      <i class="material-icons" (click)="backQCListForm()" matTooltip="Exit The Page"
+                        style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
+                        list
+                      </i>
+                    </button>&nbsp;
+                    <button id="cancel" mat-mini-fab (click)="backQCListForm()">
+                      <i class="material-icons" matTooltip="Exit The Page"
+                        style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
+                        clear
+                      </i>
+                    </button>
+                  </div>
+                </div>
+                <hr style="margin-top:0.5rem">
+  
+                <div class="p-24 ">
+                  <div fxLayout="column" fxLayoutAlign="start start " fxLayoutGap="15px">
+                    <div fxLayout="row" fxLayoutGap="10px">
+                      <div>
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="BOMCode" [(ngModel)]="model.BOMCode" formControlName="BOMCode" required>
+                          <mat-error> BOMCode required</mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div>
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="BOMName" [(ngModel)]="model.BOMName" formControlName="BOMName" required>
+                          <mat-error> BOMName required</mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div>
+                        <mat-form-field class="example-full-width" >
+                          <mat-select placeholder="ProductName"  required  [(ngModel)]="model.prdID" formControlName="prdID">
+                            <mat-option *ngFor="let product of productData" [value]="product.prdID">{{product.prdName}}</mat-option>
+                          </mat-select>
+                          <mat-error> prdName required</mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div>
+                        <mat-form-field class="example-full-width" >
+                          <mat-select placeholder="UOM"  required  [(ngModel)]="model.UOMID" formControlName="uom">
+                            <mat-option *ngFor="let uom of UOMData" [value]="uom.UOMID">{{uom.UOMName}}</mat-option>
+                          </mat-select>
+                          <mat-error> UOM required</mat-error>
+                        </mat-form-field>
+                      </div>
+  
+                    </div>
+                  </div>
+  
+                </div>
+              </form>
+  
+              <mat-card class="newgrid-card">
+                <div class="col-sm-6" style="padding-top:5px">
+                  <h6 id="h1">BOM List
+                  </h6>
+                </div>
+                <hr style="margin-top:0.5rem">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <mat-form-field class="example-full-width" >
+                      <mat-select placeholder="RMName"  required  [(ngModel)]="model1.RMID" name="RMID">
+                        <mat-option *ngFor="let rmname of Name" [value]="rmname.RMID">{{rmname.RMName}}</mat-option>
+                      </mat-select>
+                      <mat-error> RMName required</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-3">
+                    <mat-form-field class="example-full-width" >
+                      <mat-select placeholder="UOM"  required  [(ngModel)]="model1.UOMID" name="uom">
+                        <mat-option *ngFor="let uom of UOMData" [value]="uom.UOMID">{{uom.UOMName}}</mat-option>
+                      </mat-select>
+                      <mat-error> UOM required</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-3">
+                    <mat-form-field class="example-full-width">
+                      <input matInput placeholder="quantity" [(ngModel)]="model1.quantity" name="quantity" required>
+                      <mat-error> Quantity required</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-3">
+                    <button *ngIf="!checkFlag"  (click)="addBOMField(model1)"  mat-raised-button color="primary" >
+                      <mat-icon> add </mat-icon> ROW
+                    </button>
+                    <button *ngIf="checkFlag"  mat-raised-button color="primary" >
+                      <i class="material-icons">add</i>&nbsp;Update
+                    </button>
+                  </div>
+                </div>
+  
+                <div class="newgrid">
+                  <mat-table table [dataSource]="datasourceone" class="mat-elevation-z8">
+                    <ng-container matColumnDef="SNo">
+                      <mat-header-cell *matHeaderCellDef style="text-align: center;"> SNo </mat-header-cell>
+                      <mat-cell *matCellDef="let element;let i =index" style="text-align: center;"> {{i+1}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="RMName">
+                      <mat-header-cell *matHeaderCellDef> RMName </mat-header-cell>
+                      <mat-cell *matCellDef="let element: let i =index"> {{element.RMID}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="UOM">
+                      <mat-header-cell *matHeaderCellDef> UOM </mat-header-cell>
+                      <mat-cell *matCellDef="let element; let i =index"> {{element.UOMID}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="Quantity">
+                      <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
+                      <mat-cell *matCellDef="let element: let i =index"> {{element.quantity}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="Action">
+                      <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+                      <mat-cell *matCellDef="let element: let i =index">
+                        <button mat-icon-button color="primary" matTooltip="Edit This Row"
+                          [matTooltipClass]="'custom-tip'">
+                          <mat-icon aria-label="Edit Row"  (click)="updateBOMdetails(element,true,i)" class="f-18">
+                            edit
+                          </mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn" matTooltip="Delete This Row"
+                          [matTooltipClass]="'custom-tip'">
+                          <mat-icon aria-label="Add" class="f-18" (click)="deleteBOMdetails(i)" >delete</mat-icon>
+                        </button>
+                      </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayeNewGrid"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayeNewGrid;"></mat-row>
+                  </mat-table>
+  
+                </div>
+  
+                <div class="buttons" fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px">
+                  <div>
+                    <button (click)="saveBOMMaster()" mat-raised-button color="primary">Save</button>
+                  </div>
+                  <div>
+                    <button (click)="backQCListForm()" mat-raised-button color="warn">Close</button>
+                  </div>
+                </div>
+              </mat-card>
+            
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

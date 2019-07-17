@@ -1,0 +1,206 @@
+<div class="container-fluid bg1">
+  <div class="row">
+    <div class="col-sm-12" id="responsive">
+      <div class="new" id="center">
+        <div class="card" id="mainbox" >
+
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-6" style="padding-top:5px">
+                <h6 id="h1">Work Order - INHOUSE
+                </h6>
+              </div>
+              <div class="col-sm-6" style="text-align: right;margin-top:-5px;">
+                <div class="message message-error" *ngIf='showError'
+                  style="float: left; margin-bottom: 10px; display: block; left: 0px;">
+                  <div class="message-inner">
+                    <div class="message-text">Assigneed Quantity Should be less than Quantity.</div>
+                  </div>
+                </div>
+                <button id="cancel" mat-mini-fab>
+                  <i class="material-icons" matTooltip="Exit The Page"
+                    style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
+                    clear
+                  </i>
+                </button>
+              </div>
+            </div>
+            <hr style="margin-top:0.5rem">
+            <div fxLayout="column" fxLayoutAlign="center" fxLayoutGap="20px">
+              <div fxLayout="row" fxLayoutGap="20px">
+                <div>
+                  <mat-form-field>
+                    <mat-select placeholder="Sales Order" [(ngModel)]="model.OrderID"
+                      (selectionChange)="showGridNo1(model.OrderID)">
+                      <mat-option *ngFor="let salesorder of getSalesID" [value]="salesorder.OrderID">
+                        {{salesorder.OrderID}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <mat-form-field>
+                    <input matInput [matDatepicker]="picker1" placeholder="Assigned Date"
+                      [(ngModel)]="model.assignedDate" name="assignedDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field>
+                    <input matInput [matDatepicker]="picker" placeholder="Expected Delivery Date"
+                      [(ngModel)]="model.ExpectedDeliveryDate" name="ExpectedDeliveryDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field class="example-full-width">
+
+                    <mat-select placeholder="Contractor Name" [(ngModel)]="model.supplierID" name="supplierID" required>
+                      <mat-option *ngFor="let cname of contract" [value]="cname.supplierID"> {{cname.Name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div fxLayout="column" fxLayoutGap="10px" *ngIf="opengrid1">
+            <div style="    padding-left: 25px;
+            padding-right: 25px;">
+              <table mat-table [dataSource]="salesOrder_WOData" class="mat-elevation-z8">
+
+                <ng-container matColumnDef="itemno">
+                  <th mat-header-cell *matHeaderCellDef> itemNo </th>
+                  <td mat-cell *matCellDef="let element"> {{element.OrderItemID}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="itemcode">
+                  <th mat-header-cell *matHeaderCellDef> itemcode </th>
+                  <td mat-cell *matCellDef="let element"> {{element.DetlID}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="originalQty">
+                  <th mat-header-cell *matHeaderCellDef> originalQty </th>
+                  <td mat-cell *matCellDef="let element"> {{element.Quantity}} </td>
+                </ng-container>
+                <ng-container matColumnDef="qty">
+                  <th mat-header-cell *matHeaderCellDef> qty </th>
+                  <td mat-cell *matCellDef="let element"> {{element.BalanceQty}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="assignedQty">
+                  <th mat-header-cell *matHeaderCellDef> assignedQty </th>
+                  <td mat-cell *matCellDef="let element;let i =index">
+
+                    <mat-form-field style="width:40%">
+                      <input matInput [(ngModel)]="element.AssignedQty" name="assignedQty" #input1
+                        (focusout)="qtyOperation(i)">
+                    </mat-form-field>
+
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="balanceQty">
+                  <th mat-header-cell *matHeaderCellDef> balanceQty </th>
+                  <td mat-cell *matCellDef="let element">
+                    {{element.BalanceQty}}
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></tr>
+              </table>
+              <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+              </mat-paginator>
+            </div>
+
+
+            <div style="margin-right: 50px;margin-bottom: 5px;text-align: end">
+              <button style="margin-right: 50px;margin-bottom: 5px;text-align: end" [disabled]="showGenerate" mat-raised-button color="primary"
+                (click)="generateConfrimation()">Generate</button>
+            </div>
+
+          </div>
+
+          <br>
+          <div *ngIf="opengrid2" style="padding-left: 40px; padding-right: 40px;">
+            <table mat-table [dataSource]="WOAssign" class="mat-elevation-z8">
+
+              <ng-container matColumnDef="SNo">
+                <th mat-header-cell *matHeaderCellDef> SNo </th>
+                <td mat-cell *matCellDef="let element;let i = index"> {{i+1}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="itemcode">
+                <th mat-header-cell *matHeaderCellDef> itemcode </th>
+                <td mat-cell *matCellDef="let element"> {{element.WOPRDSerialID}} </td>
+              </ng-container>
+
+              <!-- qty Column -->
+              <ng-container matColumnDef="WorkorderSNo">
+                <th mat-header-cell *matHeaderCellDef> WorkorderSNo </th>
+                <td mat-cell *matCellDef="let element"> {{element.prdName}}-{{element.WODetlID}} </td>
+              </ng-container>
+
+              <!-- assignedQty Column -->
+              <!-- <ng-container matColumnDef="assignedto">
+                  <th mat-header-cell *matHeaderCellDef> assignedto </th>
+                  <td mat-cell *matCellDef="let element"> {{element.assignedto}} </td>
+                </ng-container> -->
+
+              <!-- balanceQty Column -->
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> status </th>
+                <td mat-cell *matCellDef="let element"> {{element.WOStatus}} </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns1;let i = index">
+              </tr>
+            </table>
+            <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+            </mat-paginator>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-spinner [showProgress]='!isLoading'></app-spinner>
+<ng-template #confirmation>
+  <div fxLayout="row" fxLayoutAlign="start  start " fxLayoutGap="10px">
+    <div class="w-100">
+      <!-- <h6 mat-dialog-title>UOM New
+                </h6> -->
+      <mat-toolbar color="primary" fxLayoutAlign="space-between center">
+        <span>CONFIRMATION ALERT</span>
+        <button mat-icon-button>
+          <mat-icon (click)="closeDialog()">close
+          </mat-icon>
+        </button>
+      </mat-toolbar>
+    </div>
+  </div>
+  <div class="p-24 ">
+    <div fxLayout="column" fxLayoutAlign="start  start " fxLayoutGap="15px">
+      <div fxLayout="row" fxLayoutGap="10px">
+        Do you want to generate the Work-Order Details ?
+      </div>
+
+    </div>
+    <div class="buttons" fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px">
+      <div>
+        <button (click)="generateSerialTable()" mat-raised-button color="primary">Yes</button>
+      </div>
+      <div>
+        <button (click)="closeDialog()" mat-raised-button color="warn">Review</button>
+      </div>
+    </div>
+  </div>
+</ng-template>

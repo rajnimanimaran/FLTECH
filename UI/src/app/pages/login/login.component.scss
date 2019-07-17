@@ -1,0 +1,60 @@
+.bg {
+    background: linear-gradient(to bottom, white 50%, #303F9F 0%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+  }
+  
+  h3, h5 {
+    font-family: 'Convergence', sans-serif;
+  }
+  
+  mat-form-field {
+    width: 100%;
+    font-size: 12px;
+  }
+  
+  
+  #login {
+    background: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.1), 0 10px 30px 0 rgba(0, 0, 0, 0.2);
+    height: 25.625em;
+    -webkit-transition: -webkit-transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    transition: -webkit-transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1), -webkit-transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    width: 16em;
+    // border: 3.5px solid black;
+  }
+  
+  #responsive {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 6%;
+    vertical-align: middle;
+    right: 50px;
+  }
+  
+  #center{
+    margin-top:6%;
+    text-align: left;
+    padding-left:30px
+  }
+  
+  @media only screen and (max-width:530px) {
+    #responsive {
+        display: flex;
+        justify-content: center;
+        margin-top: 6%;
+        vertical-align: middle;
+        right: 0px;
+    }
+  
+    #center{
+        text-align: center
+    }
+  }

@@ -1,0 +1,140 @@
+E:\CMS_New\KPMES\API\BusinessEntities\bin\Debug\BusinessEntities.dll.config
+E:\CMS_New\KPMES\API\BusinessEntities\bin\Debug\BusinessEntities.dll
+E:\CMS_New\KPMES\API\BusinessEntities\bin\Debug\BusinessEntities.pdb
+E:\CMS_New\KPMES\API\BusinessEntities\bin\Debug\Newtonsoft.Json.dll
+E:\CMS_New\KPMES\API\BusinessEntities\bin\Debug\Newtonsoft.Json.xml
+E:\CMS_New\KPMES\API\BusinessEntities\obj\Debug\BusinessEntities.dll
+E:\CMS_New\KPMES\API\BusinessEntities\obj\Debug\BusinessEntities.pdb
+E:\CMS_New\KPMES\API\BusinessEntities\obj\Debug\BusinessEntities.csprojResolveAssemblyReference.cache
+F:\projects\ERP(Bangalore)\API\BusinessEntities\bin\Debug\BusinessEntities.dll.config
+F:\projects\ERP(Bangalore)\API\BusinessEntities\bin\Debug\BusinessEntities.dll
+F:\projects\ERP(Bangalore)\API\BusinessEntities\bin\Debug\BusinessEntities.pdb
+F:\projects\ERP(Bangalore)\API\BusinessEntities\bin\Debug\Newtonsoft.Json.dll
+F:\projects\ERP(Bangalore)\API\BusinessEntities\bin\Debug\Newtonsoft.Json.xml
+F:\projects\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.dll
+F:\projects\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.pdb
+F:\projects\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.csprojResolveAssemblyReference.cache
+E:\ERP(Bangalore)\API\BusinessEntities\bin\Debug\BusinessEntities.dll.config
+E:\ERP(Bangalore)\API\BusinessEntities\bin\Debug\BusinessEntities.dll
+E:\ERP(Bangalore)\API\BusinessEntities\bin\Debug\BusinessEntities.pdb
+E:\ERP(Bangalore)\API\BusinessEntities\bin\Debug\Newtonsoft.Json.dll
+E:\ERP(Bangalore)\API\BusinessEntities\bin\Debug\Newtonsoft.Json.xml
+E:\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.dll
+E:\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.pdb
+C:\Users\sony\Desktop\ERP Project\API\ERP(Bangalore)\API\BusinessEntities\bin\Debug\BusinessEntities.dll.config
+C:\Users\sony\Desktop\ERP Project\API\ERP(Bangalore)\API\BusinessEntities\bin\Debug\BusinessEntities.dll
+C:\Users\sony\Desktop\ERP Project\API\ERP(Bangalore)\API\BusinessEntities\bin\Debug\BusinessEntities.pdb
+C:\Users\sony\Desktop\ERP Project\API\ERP(Bangalore)\API\BusinessEntities\bin\Debug\Newtonsoft.Json.dll
+C:\Users\sony\Desktop\ERP Project\API\ERP(Bangalore)\API\BusinessEntities\bin\Debug\Newtonsoft.Json.xml
+C:\Users\sony\Desktop\ERP Project\API\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.csprojAssemblyReference.cache
+C:\Users\sony\Desktop\ERP Project\API\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.csproj.CoreCompileInputs.cache
+C:\Users\sony\Desktop\ERP Project\API\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.csproj.CopyComplete
+C:\Users\sony\Desktop\ERP Project\API\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.dll
+C:\Users\sony\Desktop\ERP Project\API\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.pdb
+G:\ERP\API\ERP(Bangalore)\API\BusinessEntities\bin\Debug\BusinessEntities.dll.config
+G:\ERP\API\ERP(Bangalore)\API\BusinessEntities\bin\Debug\BusinessEntities.dll
+G:\ERP\API\ERP(Bangalore)\API\BusinessEntities\bin\Debug\BusinessEntities.pdb
+G:\ERP\API\ERP(Bangalore)\API\BusinessEntities\bin\Debug\Newtonsoft.Json.dll
+G:\ERP\API\ERP(Bangalore)\API\BusinessEntities\bin\Debug\Newtonsoft.Json.xml
+G:\ERP\API\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.csprojAssemblyReference.cache
+G:\ERP\API\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.csproj.CoreCompileInputs.cache
+G:\ERP\API\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.csproj.CopyComplete
+G:\ERP\API\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.dll
+G:\ERP\API\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.pdb
+E:\API\ERP(Bangalore)\API\BusinessEntities\bin\Debug\BusinessEntities.dll.config
+E:\API\ERP(Bangalore)\API\BusinessEntities\bin\Debug\BusinessEntities.dll
+E:\API\ERP(Bangalore)\API\BusinessEntities\bin\Debug\BusinessEntities.pdb
+E:\API\ERP(Bangalore)\API\BusinessEntities\bin\Debug\Newtonsoft.Json.dll
+E:\API\ERP(Bangalore)\API\BusinessEntities\bin\Debug\Newtonsoft.Json.xml
+E:\API\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.csprojAssemblyReference.cache
+E:\API\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.csproj.CoreCompileInputs.cache
+E:\API\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.csproj.CopyComplete
+E:\API\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.dll
+E:\API\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.pdb
+E:\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.csprojAssemblyReference.cache
+E:\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.csproj.CoreCompileInputs.cache
+E:\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.csproj.CopyComplete
+E:\Flowtech\ERP(Bangalore)\API\BusinessEntities\bin\Debug\BusinessEntities.dll.config
+E:\Flowtech\ERP(Bangalore)\API\BusinessEntities\bin\Debug\BusinessEntities.dll
+E:\Flowtech\ERP(Bangalore)\API\BusinessEntities\bin\Debug\BusinessEntities.pdb
+E:\Flowtech\ERP(Bangalore)\API\BusinessEntities\bin\Debug\Newtonsoft.Json.dll
+E:\Flowtech\ERP(Bangalore)\API\BusinessEntities\bin\Debug\Newtonsoft.Json.xml
+E:\Flowtech\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.csprojResolveAssemblyReference.cache
+E:\Flowtech\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.dll
+E:\Flowtech\ERP(Bangalore)\API\BusinessEntities\obj\Debug\BusinessEntities.pdb
+E:\Karthika\Flowtech\API\BusinessEntities\bin\Debug\BusinessEntities.dll.config
+E:\Karthika\Flowtech\API\BusinessEntities\bin\Debug\BusinessEntities.dll
+E:\Karthika\Flowtech\API\BusinessEntities\bin\Debug\BusinessEntities.pdb
+E:\Karthika\Flowtech\API\BusinessEntities\bin\Debug\Newtonsoft.Json.dll
+E:\Karthika\Flowtech\API\BusinessEntities\bin\Debug\Newtonsoft.Json.xml
+E:\Karthika\Flowtech\API\BusinessEntities\obj\Debug\BusinessEntities.csprojResolveAssemblyReference.cache
+E:\Karthika\Flowtech\API\BusinessEntities\obj\Debug\BusinessEntities.dll
+E:\Karthika\Flowtech\API\BusinessEntities\obj\Debug\BusinessEntities.pdb
+E:\Karthika\FlowtechNew\API\BusinessEntities\bin\Debug\BusinessEntities.dll.config
+E:\Karthika\FlowtechNew\API\BusinessEntities\bin\Debug\BusinessEntities.dll
+E:\Karthika\FlowtechNew\API\BusinessEntities\bin\Debug\BusinessEntities.pdb
+E:\Karthika\FlowtechNew\API\BusinessEntities\bin\Debug\Newtonsoft.Json.dll
+E:\Karthika\FlowtechNew\API\BusinessEntities\bin\Debug\Newtonsoft.Json.xml
+E:\Karthika\FlowtechNew\API\BusinessEntities\obj\Debug\BusinessEntities.dll
+E:\Karthika\FlowtechNew\API\BusinessEntities\obj\Debug\BusinessEntities.pdb
+E:\Karthika\FlowtechNew\API\BusinessEntities\obj\Debug\BusinessEntities.csprojResolveAssemblyReference.cache
+C:\Users\admin\Desktop\API\BusinessEntities\bin\Debug\BusinessEntities.dll.config
+C:\Users\admin\Desktop\API\BusinessEntities\bin\Debug\BusinessEntities.dll
+C:\Users\admin\Desktop\API\BusinessEntities\bin\Debug\BusinessEntities.pdb
+C:\Users\admin\Desktop\API\BusinessEntities\bin\Debug\Newtonsoft.Json.dll
+C:\Users\admin\Desktop\API\BusinessEntities\bin\Debug\Newtonsoft.Json.xml
+C:\Users\admin\Desktop\API\BusinessEntities\obj\Debug\BusinessEntities.csproj.CoreCompileInputs.cache
+C:\Users\admin\Desktop\API\BusinessEntities\obj\Debug\BusinessEntities.csproj.CopyComplete
+C:\Users\admin\Desktop\API\BusinessEntities\obj\Debug\BusinessEntities.dll
+C:\Users\admin\Desktop\API\BusinessEntities\obj\Debug\BusinessEntities.pdb
+C:\Users\admin\Desktop\API\BusinessEntities\obj\Debug\BusinessEntities.csprojAssemblyReference.cache
+F:\flow\API\BusinessEntities\bin\Debug\BusinessEntities.dll.config
+F:\flow\API\BusinessEntities\bin\Debug\BusinessEntities.dll
+F:\flow\API\BusinessEntities\bin\Debug\BusinessEntities.pdb
+F:\flow\API\BusinessEntities\bin\Debug\Newtonsoft.Json.dll
+F:\flow\API\BusinessEntities\bin\Debug\Newtonsoft.Json.xml
+F:\flow\API\BusinessEntities\obj\Debug\BusinessEntities.csproj.CoreCompileInputs.cache
+F:\flow\API\BusinessEntities\obj\Debug\BusinessEntities.csproj.CopyComplete
+F:\flow\API\BusinessEntities\obj\Debug\BusinessEntities.dll
+F:\flow\API\BusinessEntities\obj\Debug\BusinessEntities.pdb
+F:\flow\API\BusinessEntities\obj\Debug\BusinessEntities.csprojAssemblyReference.cache
+C:\Users\Kumar\Downloads\API\BusinessEntities\bin\Debug\BusinessEntities.dll.config
+C:\Users\Kumar\Downloads\API\BusinessEntities\bin\Debug\BusinessEntities.dll
+C:\Users\Kumar\Downloads\API\BusinessEntities\bin\Debug\BusinessEntities.pdb
+C:\Users\Kumar\Downloads\API\BusinessEntities\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Kumar\Downloads\API\BusinessEntities\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Kumar\Downloads\API\BusinessEntities\obj\Debug\BusinessEntities.csprojAssemblyReference.cache
+C:\Users\Kumar\Downloads\API\BusinessEntities\obj\Debug\BusinessEntities.csproj.CoreCompileInputs.cache
+C:\Users\Kumar\Downloads\API\BusinessEntities\obj\Debug\BusinessEntities.csproj.CopyComplete
+C:\Users\Kumar\Downloads\API\BusinessEntities\obj\Debug\BusinessEntities.dll
+C:\Users\Kumar\Downloads\API\BusinessEntities\obj\Debug\BusinessEntities.pdb
+E:\Flowtech 20-06\Flowtech 20-06\API\BusinessEntities\bin\Debug\BusinessEntities.dll.config
+E:\Flowtech 20-06\Flowtech 20-06\API\BusinessEntities\bin\Debug\BusinessEntities.dll
+E:\Flowtech 20-06\Flowtech 20-06\API\BusinessEntities\bin\Debug\BusinessEntities.pdb
+E:\Flowtech 20-06\Flowtech 20-06\API\BusinessEntities\bin\Debug\Newtonsoft.Json.dll
+E:\Flowtech 20-06\Flowtech 20-06\API\BusinessEntities\bin\Debug\Newtonsoft.Json.xml
+E:\Flowtech 20-06\Flowtech 20-06\API\BusinessEntities\obj\Debug\BusinessEntities.csprojAssemblyReference.cache
+E:\Flowtech 20-06\Flowtech 20-06\API\BusinessEntities\obj\Debug\BusinessEntities.csproj.CoreCompileInputs.cache
+E:\Flowtech 20-06\Flowtech 20-06\API\BusinessEntities\obj\Debug\BusinessEntities.csproj.CopyComplete
+E:\Flowtech 20-06\Flowtech 20-06\API\BusinessEntities\obj\Debug\BusinessEntities.dll
+E:\Flowtech 20-06\Flowtech 20-06\API\BusinessEntities\obj\Debug\BusinessEntities.pdb
+G:\Flowtech 20-06\Flowtech 20-06\API\BusinessEntities\bin\Debug\BusinessEntities.dll.config
+G:\Flowtech 20-06\Flowtech 20-06\API\BusinessEntities\bin\Debug\BusinessEntities.dll
+G:\Flowtech 20-06\Flowtech 20-06\API\BusinessEntities\bin\Debug\BusinessEntities.pdb
+G:\Flowtech 20-06\Flowtech 20-06\API\BusinessEntities\bin\Debug\Newtonsoft.Json.dll
+G:\Flowtech 20-06\Flowtech 20-06\API\BusinessEntities\bin\Debug\Newtonsoft.Json.xml
+G:\Flowtech 20-06\Flowtech 20-06\API\BusinessEntities\obj\Debug\BusinessEntities.csprojAssemblyReference.cache
+G:\Flowtech 20-06\Flowtech 20-06\API\BusinessEntities\obj\Debug\BusinessEntities.csproj.CoreCompileInputs.cache
+G:\Flowtech 20-06\Flowtech 20-06\API\BusinessEntities\obj\Debug\BusinessEntities.csproj.CopyComplete
+G:\Flowtech 20-06\Flowtech 20-06\API\BusinessEntities\obj\Debug\BusinessEntities.dll
+G:\Flowtech 20-06\Flowtech 20-06\API\BusinessEntities\obj\Debug\BusinessEntities.pdb
+G:\Flowtech-FT-API\API\API\BusinessEntities\bin\Debug\BusinessEntities.dll.config
+G:\Flowtech-FT-API\API\API\BusinessEntities\bin\Debug\BusinessEntities.dll
+G:\Flowtech-FT-API\API\API\BusinessEntities\bin\Debug\BusinessEntities.pdb
+G:\Flowtech-FT-API\API\API\BusinessEntities\bin\Debug\Newtonsoft.Json.dll
+G:\Flowtech-FT-API\API\API\BusinessEntities\bin\Debug\Newtonsoft.Json.xml
+G:\Flowtech-FT-API\API\API\BusinessEntities\obj\Debug\BusinessEntities.csprojAssemblyReference.cache
+G:\Flowtech-FT-API\API\API\BusinessEntities\obj\Debug\BusinessEntities.csproj.CoreCompileInputs.cache
+G:\Flowtech-FT-API\API\API\BusinessEntities\obj\Debug\BusinessEntities.csproj.CopyComplete
+G:\Flowtech-FT-API\API\API\BusinessEntities\obj\Debug\BusinessEntities.dll
+G:\Flowtech-FT-API\API\API\BusinessEntities\obj\Debug\BusinessEntities.pdb

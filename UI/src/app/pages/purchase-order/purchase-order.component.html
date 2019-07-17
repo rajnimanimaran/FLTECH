@@ -1,0 +1,446 @@
+<div class="container-fluid bg1">
+  <div class="row">
+    <div class="col-sm-12" id="responsive">
+      <div class="new" id="center">
+        <div class="card" id="mainbox" [class.fullScreen]="screenfullClicked">
+          <div *ngIf='!show' class="card-body">
+            <div class="row">
+              <div class="col-sm-6" style="padding-top:5px">
+                <h6 id="h1">Purchase Order
+                  <span id="h1s">List</span>
+                </h6>
+              </div>
+              <div class="col-sm-6" style="text-align: right;margin-top:-5px;">
+                <button id="new" mat-mini-fab>
+                  <i class="material-icons" (click)="AddproductCategorydetails()" matTooltip="Exit The Page"
+                    style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
+                    add
+                  </i>
+                </button>&nbsp;
+                
+                <button id="cancel" mat-mini-fab>
+                  <i class="material-icons" matTooltip="Exit The Page"
+                    style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
+                    clear
+                  </i>
+                </button>
+              </div>
+            </div>
+            <hr style="margin-top:0.5rem">
+            <div class="row">
+              <div class="col-sm-12">
+                <mat-form-field>
+                  <input matInput placeholder="Global Filter (Type BillNo, BillDate, VendorName..)"
+                    (keyup)="applyFilter($event.target.value)">
+                </mat-form-field>
+
+
+                <div class="table-container mat-elevation-z2">
+                    <div class="col-sm-4" style="margin-top: 17px;">
+                        <mat-radio-group [(ngModel)]="materialID">
+                          <mat-radio-button [value]="1" (click)="getPurchaseOrderDetails(0,1)">Raw Material</mat-radio-button> &nbsp;
+                          <mat-radio-button [value]="2" (click)="getPurchaseOrderDetails(0,2)">Finish Goods</mat-radio-button>
+                        </mat-radio-group>
+                      </div>
+                  <mat-table class="color-table" #table [dataSource]="getpurchase" matSort>
+
+                    <ng-container matColumnDef="SNo">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                        SNo
+                        <button mat-icon-button [matMenuTriggerFor]="SNoFilter" class="Filter-icon-WT">
+                          <mat-icon aria-label="SNo Filter">keyboard_arrow_down</mat-icon>
+                        </button>
+                        <mat-menu #SNoFilter="matMenu" yPosition="below" [overlapTrigger]="false" xPosition="before">
+                          <div class="info-wrapper menuPop">
+                            <mat-form-field class="w-100 input-label">
+                              <input matInput placeholder="Search SNo" (click)="handleClick($event)"
+                                (keyup)="applyFilter($event.target.value)" autofocus>
+                            </mat-form-field>
+                            <div class="ta-w">
+                              <button mat-mini-fab color="warn" class="satPop-ok">
+                                <mat-icon aria-label="Close">close</mat-icon>
+                              </button>
+                            </div>
+                          </div>
+                        </mat-menu>
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let data;let i= index"> {{i+1}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Code">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                        CODE
+                        <button mat-icon-button [matMenuTriggerFor]="CodeFilter" class="Filter-icon-WT">
+                          <mat-icon aria-label="Area Filter">keyboard_arrow_down</mat-icon>
+                        </button>
+                        <mat-menu CodeFilter="matMenu" yPosition="below" [overlapTrigger]="false" xPosition="before">
+                          <div class="info-wrapper menuPop">
+                            <mat-form-field class="w-100 input-label">
+                              <input matInput placeholder="Search Code." (click)="handleClick($event)"
+                                (keyup)="applyFilter($event.target.value)" autofocus>
+                            </mat-form-field>
+                            <div class="ta-w">
+                              <button mat-mini-fab color="warn" class="satPop-ok">
+                                <mat-icon aria-label="Close">close</mat-icon>
+                              </button>
+                            </div>
+                          </div>
+                        </mat-menu>
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let data">{{data.code}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="SName">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                        SupplierName
+                        <button mat-icon-button [matMenuTriggerFor]="SupplierNameFilter" class="Filter-icon-WT">
+                          <mat-icon aria-label="Area Filter">keyboard_arrow_down</mat-icon>
+                        </button>
+                        <mat-menu #SupplierNameFilter="matMenu" yPosition="below" [overlapTrigger]="false"
+                          xPosition="before">
+                          <div class="info-wrapper menuPop">
+                            <mat-form-field class="w-100 input-label">
+                              <input matInput placeholder="Search SupplierName." (click)="handleClick($event)"
+                                (keyup)="applyFilter($event.target.value)" autofocus>
+                            </mat-form-field>
+                            <div class="ta-w">
+                              <button mat-mini-fab color="warn" class="satPop-ok">
+                                <mat-icon aria-label="Close">close</mat-icon>
+                              </button>
+                            </div>
+                          </div>
+                        </mat-menu>
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let data"> {{data.SName}}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="PurchaseDate">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                        PurchaseDate
+                        <button mat-icon-button [matMenuTriggerFor]="PurchaseDateFilter" class="Filter-icon-WT">
+                          <mat-icon aria-label="Area Filter">keyboard_arrow_down</mat-icon>
+                        </button>
+                        <mat-menu #PurchaseDateFilter="matMenu" yPosition="below" [overlapTrigger]="false"
+                          xPosition="before">
+                          <div class="info-wrapper menuPop">
+                            <mat-form-field class="w-100 input-label">
+                              <input matInput placeholder="Search PurchaseDate." (click)="handleClick($event)"
+                                (keyup)="applyFilter($event.target.value)" autofocus>
+                            </mat-form-field>
+                            <div class="ta-w">
+                              <button mat-mini-fab color="warn" class="satPop-ok">
+                                <mat-icon aria-label="Close">close</mat-icon>
+                              </button>
+                            </div>
+                          </div>
+                        </mat-menu>
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let data">{{data.PurchaseDate | date:'dd/MM/yyyy'}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="ExpectDeliveryDate">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                        ExpectDeliveryDate
+                        <button mat-icon-button [matMenuTriggerFor]="ExpectDeliveryDateFilter" class="Filter-icon-WT">
+                          <mat-icon aria-label="Area Filter">keyboard_arrow_down</mat-icon>
+                        </button>
+                        <mat-menu #ExpectDeliveryDateFilter="matMenu" yPosition="below" [overlapTrigger]="false"
+                          xPosition="before">
+                          <div class="info-wrapper menuPop">
+                            <mat-form-field class="w-100 input-label">
+                              <input matInput placeholder="Search ExpectDeliveryDate." (click)="handleClick($event)"
+                                (keyup)="applyFilter($event.target.value)" autofocus>
+                            </mat-form-field>
+                            <div class="ta-w">
+                              <button mat-mini-fab color="warn" class="satPop-ok">
+                                <mat-icon aria-label="Close">close</mat-icon>
+                              </button>
+                            </div>
+                          </div>
+                        </mat-menu>
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let data">{{data.ExpectDeliveryDate | date:'dd/MM/yyyy'}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="action">
+                      <mat-header-cell *matHeaderCellDef class="color-white">Action</mat-header-cell>
+                      <mat-cell *matCellDef="let data">{{data.action}}
+                        <button mat-icon-button color="primary" matTooltip="Edit This Row"
+                          [matTooltipClass]="'custom-tip'">
+                          <mat-icon aria-label="Edit Row" (click)="updatePurchaseDetailsgrid(data)" class="f-18">
+                            edit
+                          </mat-icon>
+                        </button>
+                      </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedgridcolumnsgrid"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedgridcolumnsgrid;let i=index"
+                      (click)="selection.toggle(row)">
+                    </mat-row>
+                  </mat-table>
+
+                  <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+                    [showFirstLastButtons]="true">
+                  </mat-paginator>
+                </div>
+
+                <!-- <app-spinner [showProgress]='!isLoading'></app-spinner> -->
+                
+              </div>
+            </div>
+          </div>
+          <div *ngIf='show' class="card-body">
+            <div class="row">
+              <div class="col-sm-6" style="padding-top:5px">
+                <h6 id="h1">Purchase Order
+                  <span id="h1s">New</span>
+                </h6>
+              </div>
+              <div class="col-sm-6" style="text-align: right;margin-top:-5px;">
+                <button id="new" mat-mini-fab>
+                  <i class="material-icons" (click)="backproductCategoryListForm()" matTooltip="Exit The Page"
+                    style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
+                    list
+                  </i>
+                </button>&nbsp;
+                <!-- <button id="full" class="fullscreen" (click)="onClick()" mat-mini-fab>
+                  <i (click)="FScreenIcon = !FScreenIcon" class="material-icons" matTooltip="Exit The Page"
+                    style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
+                    fullscreen
+                  </i>
+                </button>&nbsp; -->
+                <button id="cancel" mat-mini-fab (click)="backproductCategoryListForm()">
+                  <i class="material-icons" matTooltip="Exit The Page"
+                    style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
+                    clear
+                  </i>
+                </button>
+              </div>
+            </div>
+            <hr style="margin-top:0.5rem">
+            <form [formGroup]="PurchaseOrderForm">
+            <div class="row">
+              <div class="col-sm-4">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="PurchaseID" [(ngModel)]="model.PurchaseID" formControlName="PurchaseID" required>
+                  <!-- {{modelss.PurchaseID+1}} -->
+                  <mat-error> PurchaseID required</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-4">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Code" [(ngModel)]="model.code" formControlName="Code" required>
+                  <mat-error> Code required</mat-error>
+                </mat-form-field>
+              </div>
+              <!-- <div class="col-sm-4">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="SupplierName" [(ngModel)]="model.SupplierID" name="SupplierID" required>
+                    <mat-error> SupplierName required</mat-error>
+                  </mat-form-field>
+                </div> -->
+
+              <div class="col-sm-4">
+
+                <mat-form-field class="example-full-width">
+                  <mat-select placeholder="SupplierName" required [(ngModel)]="model.SID" formControlName="SID">
+                    <mat-option *ngFor="let name of Supplier" [value]="name.SID">{{name.SName}}</mat-option>
+                  </mat-select>
+                  <mat-error> SupplierName required</mat-error>
+                </mat-form-field>
+
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <mat-form-field>
+                  <input matInput [matDatepicker]="picker" placeholder="PurchaseDate" [(ngModel)]="model.PurchaseDate"
+                  formControlName="PurchaseDate">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-4">
+                <mat-form-field>
+                  <input matInput [matDatepicker]="picker1" placeholder="ExpectDeliveryDate"
+                    [(ngModel)]="model.ExpectDeliveryDate" formControlName="ExpectDeliveryDate">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-4" style="margin-top: 17px;">
+                <mat-radio-group [(ngModel)]="model.materialType" formControlName="materialType" [disabled]="disableRadioButton">
+                  <mat-radio-button [value]="1" (click)="selectType('RM')">Raw Material</mat-radio-button> &nbsp;
+                  <mat-radio-button [value]="2" (click)="selectType('PRD')">Finish Goods</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
+            </form>
+            <br>
+
+            <hr />
+            <div>
+            <div class="container" style="margin-top:2%;" *ngIf='show'>
+              <div class="card">
+                <div class="card-body">
+                  <div class="rowwidth" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+                    <mat-form-field *ngIf='materialType'>
+                      <mat-select placeholder="RMName" required [(ngModel)]="model1.RMID" name="RMID">
+                        <mat-option *ngFor="let rmname of Rawmaterial" [value]="rmname.RMID">{{rmname.RMName}}</mat-option>
+                      </mat-select>
+                      <mat-error> RMName required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field *ngIf='!materialType'>
+                      <mat-select placeholder="Product Name" required [(ngModel)]="model1.prdID" name="prdId">
+                        <mat-option *ngFor="let prd of Product" [value]="prd.prdID">{{prd.prdName}}</mat-option>
+                      </mat-select>
+                      <mat-error> ProductName required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput required placeholder="Quantity" [(ngModel)]="model1.Quantity"
+                        (keypress)="onlyNumber($event)" name="Quantity" required>
+                    </mat-form-field>
+                    <mat-form-field>
+                      <mat-select placeholder="UOM" [(ngModel)]="model1.UOMID" name="UOM" required>
+                        <!-- <mat-option value="0">--select--</mat-option > -->
+                        <mat-option *ngFor="let UOM  of UOMData;let i = index" [value]="UOM.UOMID">
+                          {{UOM.UOMName}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field  *ngIf='!materialType'>
+                      <input matInput required placeholder="GSTNo" [(ngModel)]="model1.GSTNo"
+                        required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput required placeholder="HSNCode" [(ngModel)]="model1.HSNCode"
+                          required>
+                      </mat-form-field>
+                    <mat-form-field>
+                      <input matInput required placeholder="Rate" [(ngModel)]="model1.Rate"
+                        (keypress)="onlyNumber($event)" OnlyNumber="true" required>
+                    </mat-form-field>
+                    <mat-form-field>
+                      <input matInput required placeholder="Tax" maxlength="1" min="0" max="10" [(ngModel)]="model1.Tax"
+                        (keypress)="onlyNumber($event)" OnlyNumber="true" required>
+                    </mat-form-field>
+                    <div>
+                      <button *ngIf="!editflag" mat-raised-button color="primary" (click)="addFieldValue(model1)"
+                      [disabled]="model1.Quantity == undefined || model1.Quantity == '' && model1.Rate == undefined || model1.Rate   ==''">
+                        <mat-icon>add</mat-icon>Row
+                      </button>
+                    </div>                  
+                  </div>
+
+                  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                    <ng-container matColumnDef="SNo">
+                      <mat-header-cell *matHeaderCellDef style="text-align: center;"> SNo </mat-header-cell>
+                      <mat-cell *matCellDef="let OrderFormDetail;let i =index" style="text-align: center;"> {{i+1}}
+                      </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="RMID">
+                      <mat-header-cell *matHeaderCellDef style="text-align: center;"> 
+                       Material Name
+                         </mat-header-cell>
+                      <mat-cell *matCellDef="let OrderFormDetail;let i =index" style="text-align: center;">
+                        {{OrderFormDetail?.prdName}}  {{OrderFormDetail?.RMName}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="quantity">
+                      <mat-header-cell *matHeaderCellDef style="text-align: center;"> Quantity </mat-header-cell>
+                      <mat-cell *matCellDef="let OrderFormDetail;let i =index" style="text-align: center;">
+                        {{OrderFormDetail.Quantity}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="UOM">
+                      <mat-header-cell *matHeaderCellDef style="text-align: center;"> UOM </mat-header-cell>
+                      <mat-cell *matCellDef="let OrderFormDetail;let i =index" style="text-align: center;">
+                        {{OrderFormDetail.UOMName}}
+                      </mat-cell>
+                    </ng-container>
+
+                    <!-- <ng-container matColumnDef="GSTNO"  *ngIf='!materialType'>
+                      <mat-header-cell *matHeaderCellDef style="text-align: center;"> GST NO</mat-header-cell>
+                      <mat-cell *matCellDef="let OrderFormDetail;let i =index" style="text-align: center;">
+                        {{OrderFormDetail.GSTNo}} </mat-cell>
+                    </ng-container> -->
+                    
+                    <ng-container matColumnDef="HSNCode" >
+                        <mat-header-cell *matHeaderCellDef style="text-align: center;">HSNCode</mat-header-cell>
+                        <mat-cell *matCellDef="let OrderFormDetail;let i =index" style="text-align: center;">
+                          {{OrderFormDetail.HSNCode}} </mat-cell>
+                      </ng-container>
+
+                    <ng-container matColumnDef="Rate">
+                      <mat-header-cell *matHeaderCellDef style="text-align: center;"> Rate </mat-header-cell>
+                      <mat-cell *matCellDef="let OrderFormDetail;let i =index" style="text-align: center;">
+                        {{OrderFormDetail.Rate}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Tax">
+                      <mat-header-cell *matHeaderCellDef style="text-align: center;"> Tax </mat-header-cell>
+                      <mat-cell *matCellDef="let OrderFormDetail;let i =index" style="text-align: center;">
+                        {{OrderFormDetail.Tax}}
+                      </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Amount">
+                      <mat-header-cell *matHeaderCellDef style="text-align: center;"> Amount </mat-header-cell>
+                      <mat-cell *matCellDef="let OrderFormDetail;let i =index" style="text-align: center;">
+                        {{OrderFormDetail.Amount}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="TAmount">
+                      <mat-header-cell *matHeaderCellDef style="text-align:center;"> TAmount </mat-header-cell>
+                      <mat-cell *matCellDef="let OrderFormDetail;let i =index" style="text-align: center;">
+                        {{OrderFormDetail.T_Amount  }} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action">
+                      <mat-header-cell *matHeaderCellDef class="color-white">Action</mat-header-cell>
+                      <mat-cell *matCellDef="let OrderFormDetail; let i = index;">
+                        <button mat-icon-button color="primary" matTooltip="Edit This Row"
+                          [matTooltipClass]="'custom-tip'">
+                          <mat-icon aria-label="Edit Row" (click)="editPurchaseDetails(OrderFormDetail,true,i)"
+                            class="f-18">
+                            edit
+                          </mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn" matTooltip="Delete This Row"
+                          [matTooltipClass]="'custom-tip'">
+                          <mat-icon aria-label="Add" class="f-18" (click)="deletePurchaseDetails(i)">delete</mat-icon>
+                        </button>
+                      </mat-cell>
+                    </ng-container>
+
+
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                  </mat-table>
+
+
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <br>
+            <div class="row">
+              <div class="col-sm-12" style="text-align: right">
+                <mat-label><b>Grand Total:</b></mat-label>&nbsp;
+                <b style="color:red">{{getGrandtotal()| number:'1.2-2'}}</b>&nbsp;
+                <button id="savedetails" (click)="saveOrderForm()" mat-raised-button>Save</button>&nbsp;
+                <button id="save" (click)="onSubmit()" mat-raised-button> <i class="material-icons">
+                    local_printshop
+                  </i>&nbsp;Save & Print</button>&nbsp;
+                <button id="caancel" (click)="backproductCategoryListForm()" mat-raised-button>Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

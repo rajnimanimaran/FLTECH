@@ -1,0 +1,182 @@
+<div class="container-fluid bg1">
+  <div class="row">
+    <div class="col-sm-12" id="responsive">
+      <div class="new" id="center">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-6" style="padding-top:5px">
+                <h6 id="h1">Quality Audit </h6>
+              </div>
+              <div class="col-sm-6" style="text-align: right;margin-top:-5px;">
+                <button id="new" mat-mini-fab>
+                  <i class="material-icons" (click)="AddproductCategorydetails()" matTooltip="Exit The Page"
+                    style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
+                    add
+                  </i>
+                </button>&nbsp;
+
+                <button id="cancel" mat-mini-fab>
+                  <i class="material-icons" matTooltip="Exit The Page"
+                    style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
+                    clear
+                  </i>
+                </button>
+              </div>
+            </div>
+
+            <hr style="margin-top:0.5rem">
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+              <div class="radiobtnfont">WorkOrder :</div>
+              <mat-form-field class="workorder">
+                <mat-select [(ngModel)]="model.workorderID" (selectionChange)="selectoption(model.workorderID)">
+                  <mat-option *ngFor="let workorder of workorderData" [value]="workorder.WorkOrderID">
+                    {{workorder.WorkOrderID}} </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <hr style="margin-top:0.5rem">
+          </div>
+
+          <div class="card-body" *ngIf="tableShow">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+              <ng-container matColumnDef="ItemNo">
+                <th mat-header-cell *matHeaderCellDef> ItemNo </th>
+                <td mat-cell *matCellDef="let element"> {{element.WODetlID}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="ItemCode">
+                <th mat-header-cell *matHeaderCellDef> ItemCode </th>
+                <td mat-cell *matCellDef="let element"> {{element.prdID}}_{{element.WorkOrderID}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Qty">
+                <th mat-header-cell *matHeaderCellDef> Quantity </th>
+                <td mat-cell *matCellDef="let element"> {{element.Quantity}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="ApprovalQty">
+                <th mat-header-cell *matHeaderCellDef> approval Qty </th>
+                <td mat-cell *matCellDef="let element"> {{element.ApprovedQuantity}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="RejectedQty">
+                <th mat-header-cell *matHeaderCellDef> Rejected Qty </th>
+                <td mat-cell *matCellDef="let element"> {{element.RejectedQuantity}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="ReworkQty">
+                <th mat-header-cell *matHeaderCellDef> Rework Qty </th>
+                <td mat-cell *matCellDef="let element"> {{element.ReworkQuantity}} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row (click)="getWorkorderdetail(element.WorkOrderID)"
+                *matRowDef="let row; let element; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+
+          <div class="card-body" *ngIf="itemdetailView">
+            <table mat-table [dataSource]="dataSource1" class="mat-elevation-z8">
+
+              <ng-container matColumnDef="SNo">
+                <th mat-header-cell *matHeaderCellDef> SNo </th>
+                <td mat-cell *matCellDef="let element"> {{element.WOPRDSerialID}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="AssignedTo">
+                <th mat-header-cell *matHeaderCellDef> AssignedTo </th>
+                <td mat-cell *matCellDef="let element"> {{element.AssignTo}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Status">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let element"> {{element.WOStatus}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Audit">
+                <th mat-header-cell *matHeaderCellDef> Audit </th>
+                <td mat-cell *matCellDef="let element">
+                  <button mat-icon-button (click)="addContractor(element.ProductID)">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+              <tr mat-row   *matRowDef="let row;let element; columns: displayedColumns1;"></tr>
+            </table>
+          </div>
+
+          <ng-template #qualityAuditDialog>
+            <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="20px">
+              <div class="w-100" fxLayout="row" fxLayoutAlign="start  start " fxLayoutGap="10px">
+                <div class="w-100">
+                  <!-- <h6 mat-dialog-title>UOM New
+                      </h6> -->
+                  <mat-toolbar color="primary" fxLayoutAlign="space-between center">
+                    <span>QC Audit</span>
+                    <button mat-icon-button>
+                      <mat-icon (click)="closeDialog()">close
+                      </mat-icon>
+                    </button>
+                  </mat-toolbar>
+                </div>
+              </div>
+
+              <table mat-table class="QCtable" [dataSource]="dataSource2">
+
+                <ng-container matColumnDef="CheckId">
+                  <th mat-header-cell *matHeaderCellDef> CheckId </th>
+                  <td mat-cell *matCellDef="let element"> {{element.ChkListID}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="CheckDescription">
+                  <th mat-header-cell *matHeaderCellDef> Check Description </th>
+                  <td mat-cell *matCellDef="let element"> {{element.chkName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Result">
+                  <th mat-header-cell *matHeaderCellDef> Result </th>
+                  <td mat-cell *matCellDef="let element;let i=index">
+                    <mat-radio-group  fxLayoutGap="5px">
+                      <mat-radio-button value="PASS">PASS</mat-radio-button>
+                      <mat-radio-button value="FAIL">FAIL</mat-radio-button>
+                    </mat-radio-group>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+              </table>
+
+              <div fxLayout="row" fxLayoutAlign="start  center " fxLayoutGap="10px">
+                <span> Overall :</span>
+             <span>
+                <mat-radio-group [(ngModel)]="FinalResult"  fxLayoutGap="5px">
+                    <mat-radio-button value="Approved">Approved</mat-radio-button>
+                    <mat-radio-button value="Rejected">Rejected</mat-radio-button>
+                    <mat-radio-button value="Rework">Rework</mat-radio-button>
+                  </mat-radio-group>
+             </span>   
+              </div>
+              <div fxLayout="row" fxLayoutAlign="start  center " fxLayoutGap="10px">
+                <span>Remarks:</span>
+                <span>
+                  <mat-form-field>
+                    <textarea matInput placeholder="Remarks"></textarea>
+                  </mat-form-field>
+                </span>
+              </div>
+              <div fxLayoutAlign="center center">
+                  <button mat-raised-button color="primary">Submit</button>
+              </div>
+            </div>
+          </ng-template>
+
+
+        </div>
+      </div>
+    </div>
+  </div>

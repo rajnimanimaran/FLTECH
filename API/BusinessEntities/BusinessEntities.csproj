@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0C853FA2-2452-42C5-93C4-3702B64D5341}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessEntities</RootNamespace>
+    <AssemblyName>BusinessEntities</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Administrator\Action Entities\ActionEntity.cs" />
+    <Compile Include="Administrator\Location\AreaEntities\AreaEntity.cs" />
+    <Compile Include="Administrator\Location\CityEntities\CityEntity.cs" />
+    <Compile Include="CommonDTOs\InsertResultDTO.cs" />
+    <Compile Include="Grn\GrnEntity.cs" />
+    <Compile Include="Human Resource\CompanyEntities\CompanyEntity.cs" />
+    <Compile Include="Administrator\Location\CountryEntities\CountryEntity.cs" />
+    <Compile Include="Human Resource\Department Entities\DepartmentEntity.cs" />
+    <Compile Include="Human Resource\DesignationEntities\DesignationEntity.cs" />
+    <Compile Include="Human Resource\EmployeeAcademyEntities\EmployeeAcademyEntity.cs" />
+    <Compile Include="Human Resource\EmployeeAddressEntities\EmployeeAddressEntity.cs" />
+    <Compile Include="Human Resource\EmployeeDoumentEntities\EmployeeDocumentEntity.cs" />
+    <Compile Include="Human Resource\EmployeeEntities\EmployeeEntity.cs" />
+    <Compile Include="Human Resource\EmployeeExperienceEntities\EmployeeExperienceEntity.cs" />
+    <Compile Include="Administrator\Menu\MenuEntity.cs" />
+    <Compile Include="Human Resource\NatureOfBusiness\NatureOfBusinessEntities.cs" />
+    <Compile Include="Human Resource\OrganizationLevel\OrganizationLevelEntity.cs" />
+    <Compile Include="Human Resource\OwnerShipEntites\OwnerShipEntites.cs" />
+    <Compile Include="Master1\BOM Master\BOM_masterEntity.cs" />
+    <Compile Include="Master1\BOM_Details\BOM_DetailsEntity.cs" />
+    <Compile Include="Master1\Customer\CustomerEntity.cs" />
+    <Compile Include="Master1\ProductStock\ProductStockEntity.cs" />
+    <Compile Include="Master1\Product\productEntity.cs" />
+    <Compile Include="Master1\Purchase Order\PurchaseOrderEntity.cs" />
+    <Compile Include="Master1\QC\QualityControlDTO.cs" />
+    <Compile Include="Master1\RawMaterial\RawMaterialMasterEntity.cs" />
+    <Compile Include="Master1\SalesOrder\SalesOrderEntity.cs" />
+    <Compile Include="Master1\StockRawMaterial\rawMaterialStockEntity.cs" />
+    <Compile Include="Master1\SubContract\SubContEntity.cs" />
+    <Compile Include="Master1\Supplier\SupplierEntity.cs" />
+    <Compile Include="Master1\UOM\UOMMasterEntity.cs" />
+    <Compile Include="Master1\WorkOrderMaster\WorkOrderEntity.cs" />
+    <Compile Include="Master\Mapping Entities\MappingEntity.cs" />
+    <Compile Include="Master\Product Entities\ProductEntity.cs" />
+    <Compile Include="Master\RawMaterial Entities\RawMaterialEntity.cs" />
+    <Compile Include="Master\RFQ Entities\RFQEntity.cs" />
+    <Compile Include="Master\Store Entities\StoreEntity.cs" />
+    <Compile Include="Master\StoreRaw Entities\StoreRawEntity.cs" />
+    <Compile Include="Master\Terms Entities\TermsEntity.cs" />
+    <Compile Include="Master\Testing Entities\TestingEntity.cs" />
+    <Compile Include="Master\TypeOfTest Entities\TypeOfTestEntity.cs" />
+    <Compile Include="Master\UOM Entities\UOMEntity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Administrator\RoleEntities\RoleEntity.cs" />
+    <Compile Include="Administrator\UserMenuMapping\UserMenuMappingEntity.cs" />
+    <Compile Include="Administrator\RoleMenuMapping\RoleMenuMappingEntity.cs" />
+    <Compile Include="Administrator\Location\StateEntities\StateEntity.cs" />
+    <Compile Include="Administrator\TokenEntities\TokenEntity.cs" />
+    <Compile Include="Administrator\UserEntities\UserEntity.cs" />
+    <Compile Include="purchase_Order\Purchase_OrderEntity.cs" />
+    <Compile Include="QualityAudit\QualityAuditEntity.cs" />
+    <Compile Include="Sales_Order\SalesOrderEntity.cs" />
+    <Compile Include="sodm\sodmEntity.cs" />
+    <Compile Include="Student\StudentDetails.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,64 @@
+<div class="wrapper">
+    <div>
+      <div class="navbar navbar-expand-lg  docs-primary-header" id="headerfixed">
+        <div class="container-fluid" id="hbtn">
+          <button style="color:white" mat-icon-button class="mb-1" [routerLink]="['/login']">
+            <i style="line-height: 1.3;font-size:18px" class="material-icons">home</i>
+          </button>
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarSupportedContent"
+           aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation" mat-mini-fab 
+            style="border-radius:5px;height:30px;width:35px;box-shadow: none"
+            color="primary">
+            <mat-icon style="line-height: 0.5;">list</mat-icon>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <div>
+                <span *ngFor="let item of navItems">
+                  <span *ngIf="item.SubMenuItems && item.SubMenuItems.length > 0">
+                    <button id="hbtn" mat-flat-button [disableRipple]="true" [matMenuTriggerFor]="menu.childMenu" style="color: white;background: inherit;font-size: 11px" class="navbar navbar-expand-lg docs-primary-header" >
+                           <b>{{item.MenuName}}</b>
+                    </button>
+                    <app-nav-menu-items #menu [items]="item.SubMenuItems"></app-nav-menu-items>
+                  </span>
+                  <span *ngIf="!item.SubMenuItems || item.SubMenuItems.length === 0"> &nbsp;
+                    <button mat-button color="primary">
+                      {{item.MenuName}}
+                    </button>
+                  </span>
+                </span>
+  
+              </div>
+            </ul>
+            <ul class="nav justify-content-end">
+              <li class="nav-item dropdown" style="width:35px;height:35px">
+                <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="Theme" color="default" style="width: 100%;padding-top: 8px">
+                  <i style="color:white;font-size:15px" class="material-icons">format_color_fill</i>
+                </button>
+                <mat-menu #menu="matMenu" class="docs-theme-picker-menu">
+                  <div class="d-flex justify-content-around my-2">
+                    <button mat-mini-fab class="default-theme-selector" (click)="onSetTheme('default-theme')" matTooltip="Default Theme"></button>
+                    <button mat-mini-fab class="red-theme-selector" (click)="onSetTheme('red-theme')" matTooltip="Red Theme"></button>
+                  </div>
+                  <div class="d-flex justify-content-around my-2">
+                    <button mat-mini-fab class="dark-theme-selector" (click)="onSetTheme('dark-theme')" matTooltip="Dark Theme"></button>
+                    <button mat-mini-fab class="light-theme-selector" (click)="onSetTheme('light-theme')" matTooltip="Light Theme"></button>
+                  </div>
+                </mat-menu>
+              </li>
+              <div>
+              </div>
+              <li class="nav-item" style="width:40px">
+                <button routerLink="/login" mat-icon-button class="nav-link" style="color:white;font-size:12px;padding-top: 6px;width: 100%">
+                  <i class="fas fa-power-off"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+    <!-- <app-spinner [showProgress]='!isLoading'></app-spinner> -->
+  </div>

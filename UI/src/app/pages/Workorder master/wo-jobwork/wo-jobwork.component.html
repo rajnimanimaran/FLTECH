@@ -1,0 +1,176 @@
+<div class="container-fluid bg1">
+  <div class="row">
+    <div class="col-sm-12" id="responsive">
+      <div class="new" id="center">
+        <div class="card" id="mainbox">
+
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-6" style="padding-top:5px">
+                <h6 id="h1">Work Order - JOB WORK
+                </h6>
+              </div>
+              <div class="col-sm-6" style="text-align: right;margin-top:-5px;">
+           
+                <button id="cancel" mat-mini-fab>
+                  <i class="material-icons" matTooltip="Exit The Page"
+                    style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
+                    clear
+                  </i>
+                </button>
+              </div>
+            </div>
+            <hr style="margin-top:0.5rem">
+            <div>
+              <mat-form-field>
+                <mat-select placeholder="Sales Order" (selectionChange)="showGridNo1()">
+                  <mat-option [value]="1001">
+                    {{1001}}
+                  </mat-option>
+                  <mat-option [value]="1002">
+                    {{1002}}
+                  </mat-option>
+                  <mat-option [value]="1003">
+                    {{1003}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="column" fxLayoutGap="10px" *ngIf="opengrid1">
+              <div>
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                  <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+                  <!-- itemcode Column -->
+                  <ng-container matColumnDef="itemno">
+                    <th mat-header-cell *matHeaderCellDef> itemNo </th>
+                    <td mat-cell *matCellDef="let element"> {{element.itemno}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="itemcode">
+                    <th mat-header-cell *matHeaderCellDef> itemcode </th>
+                    <td mat-cell *matCellDef="let element"> {{element.itemcode}} </td>
+                  </ng-container>
+
+                  <!-- qty Column -->
+                  <ng-container matColumnDef="qty">
+                    <th mat-header-cell *matHeaderCellDef> qty </th>
+                    <td mat-cell *matCellDef="let element"> {{element.qty}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="price">
+                    <th mat-header-cell *matHeaderCellDef> unit price </th>
+                    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="tax">
+                    <th mat-header-cell *matHeaderCellDef> tax </th>
+                    <td mat-cell *matCellDef="let element"> {{element.tax}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="hsn">
+                    <th mat-header-cell *matHeaderCellDef> hsn code </th>
+                    <td mat-cell *matCellDef="let element"> {{element.hsn}} </td>
+                  </ng-container>
+                  <!-- assignedQty Column -->
+                  <ng-container matColumnDef="assignedQty">
+                    <th mat-header-cell *matHeaderCellDef> assignedQty </th>
+                    <td mat-cell *matCellDef="let element;let i =index">
+
+                      <mat-form-field style="width:40%">
+                        <input matInput [(ngModel)]="element.assignedQty" name="assignedQty" #input1
+                          (focusout)="qtyOperation(i)">
+                      </mat-form-field>
+
+                    </td>
+                  </ng-container>
+
+                  <!-- balanceQty Column -->
+                  <ng-container matColumnDef="balanceQty">
+                    <th mat-header-cell *matHeaderCellDef> balanceQty </th>
+                    <td mat-cell *matCellDef="let element">
+                      <!-- {{element.balanceQty}}  -->
+                      <!-- <mat-form-field style="width:40%"> -->
+                      {{element.balanceQty}}
+                      <!-- <input matInput [(ngModel)]="element.balanceQty" name="balanceQty" readonly> -->
+                      <!-- </mat-form-field> -->
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="assignedto">
+                    <th mat-header-cell *matHeaderCellDef> assignedto </th>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-form-field >
+                          <mat-select [(ngModel)]="element.value" name="assigned">
+                            <mat-option *ngFor="let a of assignedTo" [value]="a.value">
+                                {{a.viewValue}}
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></tr>
+                </table>
+                <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+                  </mat-paginator>
+              </div>
+
+
+              <div fxLayoutAlign="end end">
+                <button mat-raised-button (click)="showGridNo2()">Generate</button>
+              </div>
+
+            </div>
+
+            <br>
+            <div *ngIf="opengrid2">
+              <table mat-table [dataSource]="dataSource1" class="mat-elevation-z8">
+
+                <!--- Note that these columns can be defined in any order.
+                                  The actual rendered columns are set as a property on the row definition" -->
+
+                <!-- itemcode Column -->
+
+                <ng-container matColumnDef="SNo">
+                  <th mat-header-cell *matHeaderCellDef> SNo </th>
+                  <td mat-cell *matCellDef="let element"> {{element.SNo}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="itemcode">
+                  <th mat-header-cell *matHeaderCellDef> itemcode </th>
+                  <td mat-cell *matCellDef="let element"> {{element.itemcode}} </td>
+                </ng-container>
+
+                <!-- qty Column -->
+                <ng-container matColumnDef="WorkorderSNo">
+                  <th mat-header-cell *matHeaderCellDef> WorkorderSNo </th>
+                  <td mat-cell *matCellDef="let element"> {{element.WorkorderSNo}} </td>
+                </ng-container>
+
+                <!-- assignedQty Column -->
+                <ng-container matColumnDef="assignedto">
+                  <th mat-header-cell *matHeaderCellDef> assignedto </th>
+                  <td mat-cell *matCellDef="let element"> {{element.assignedto}} </td>
+                </ng-container>
+
+                <!-- balanceQty Column -->
+                <ng-container matColumnDef="status">
+                  <th mat-header-cell *matHeaderCellDef> status </th>
+                  <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns1;let i = index">
+                </tr>
+              </table>
+              <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+                </mat-paginator>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

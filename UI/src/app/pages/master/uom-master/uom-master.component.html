@@ -1,0 +1,243 @@
+<div class="container-fluid bg1">
+  <div class="row">
+    <div class="col-sm-12" id="responsive">
+      <div class="new" id="center">
+        <div class="card" id="mainbox" [class.fullScreen]="screenfullClicked">
+
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-6" style="padding-top:5px">
+                <h6 id="h1">Unit Of Measurement
+                  <span id="h1s">List</span>
+                </h6>
+              </div>
+              <div class="col-sm-6" style="text-align: right;margin-top:-5px;">
+                <button id="new" mat-mini-fab>
+                  <i class="material-icons" (click)="addUom()" matTooltip="Add UOM"
+                    style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
+                    add
+                  </i>
+                </button>&nbsp;
+                <button id="cancel" mat-mini-fab>
+                  <i class="material-icons" matTooltip="Exit The Page"
+                    style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
+                    clear
+                  </i>
+                </button>
+              </div>
+            </div>
+            <hr style="margin-top:0.5rem">
+
+          
+
+            <div class="table-container mat-elevation-z2">
+              <mat-table class="color-table" #table [dataSource]="dataSource" matSort>
+
+                <ng-container matColumnDef="SNo">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                    SNo
+                    <button mat-icon-button [matMenuTriggerFor]="SNoFilter" class="Filter-icon-WT">
+                      <mat-icon aria-label="SNo Filter">keyboard_arrow_down</mat-icon>
+                    </button>
+                    <mat-menu #SNoFilter="matMenu" yPosition="below" [overlapTrigger]="false" xPosition="before">
+                      <div class="info-wrapper menuPop">
+                        <mat-form-field class="w-100 input-label">
+                          <input matInput placeholder="Search SNo" (click)="handleClick($event)"
+                            (keyup)="applyFilter($event.target.value)" autofocus>
+                        </mat-form-field>
+                        <div class="ta-w">
+                          <button mat-mini-fab color="warn" class="satPop-ok">
+                            <mat-icon aria-label="Close">close</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </mat-menu>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let data;let i= index"> {{i+1}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="UOMCode">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                    UOMCode
+                    <button mat-icon-button [matMenuTriggerFor]="UOMCodeFilter" class="Filter-icon-WT">
+                      <mat-icon aria-label="Area Filter">keyboard_arrow_down</mat-icon>
+                    </button>
+                    <mat-menu #UOMCodeFilter="matMenu" yPosition="below" [overlapTrigger]="false" xPosition="before">
+                      <div class="info-wrapper menuPop">
+                        <mat-form-field class="w-100 input-label">
+                          <input matInput placeholder="Search UOMCode." (click)="handleClick($event)"
+                            (keyup)="applyFilter($event.target.value)" autofocus>
+                        </mat-form-field>
+                        <div class="ta-w">
+                          <button mat-mini-fab color="warn" class="satPop-ok">
+                            <mat-icon aria-label="Close">close</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </mat-menu>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let data">{{data.UOMCode}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="UOMName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                    UOMName
+                    <button mat-icon-button [matMenuTriggerFor]="UOMNameFilter" class="Filter-icon-WT">
+                      <mat-icon aria-label="Area Filter">keyboard_arrow_down</mat-icon>
+                    </button>
+                    <mat-menu #UOMNameFilter="matMenu" yPosition="below" [overlapTrigger]="false" xPosition="before">
+                      <div class="info-wrapper menuPop">
+                        <mat-form-field class="w-100 input-label">
+                          <input matInput placeholder="Search UOMName." (click)="handleClick($event)"
+                            (keyup)="applyFilter($event.target.value)" autofocus>
+                        </mat-form-field>
+                        <div class="ta-w">
+                          <button mat-mini-fab color="warn" class="satPop-ok">
+                            <mat-icon aria-label="Close">close</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </mat-menu>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let data"> {{data.UOMName}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Multifier">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                    Multiplier
+                    <button mat-icon-button [matMenuTriggerFor]="MultifierFilter" class="Filter-icon-WT">
+                      <mat-icon aria-label="Area Filter">keyboard_arrow_down</mat-icon>
+                    </button>
+                    <mat-menu #MultifierFilter="matMenu" yPosition="below" [overlapTrigger]="false" xPosition="before">
+                      <div class="info-wrapper menuPop">
+                        <mat-form-field class="w-100 input-label">
+                          <input matInput placeholder="Search Multifier." (click)="handleClick($event)"
+                            (keyup)="applyFilter($event.target.value)" autofocus>
+                        </mat-form-field>
+                        <div class="ta-w">
+                          <button mat-mini-fab color="warn" class="satPop-ok">
+                            <mat-icon aria-label="Close">close</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </mat-menu>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let data"> {{data.Multifier}}</mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="BaseUnit">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                    BaseUnit
+                    <button mat-icon-button [matMenuTriggerFor]="BaseUnitFilter" class="Filter-icon-WT">
+                      <mat-icon aria-label="Area Filter">keyboard_arrow_down</mat-icon>
+                    </button>
+                    <mat-menu #BaseUnitFilter="matMenu" yPosition="below" [overlapTrigger]="false" xPosition="before">
+                      <div class="info-wrapper menuPop">
+                        <mat-form-field class="w-100 input-label">
+                          <input matInput placeholder="Search BaseUnit." (click)="handleClick($event)"
+                            (keyup)="applyFilter($event.target.value)" autofocus>
+                        </mat-form-field>
+                        <div class="ta-w">
+                          <button mat-mini-fab color="warn" class="satPop-ok">
+                            <mat-icon aria-label="Close">close</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </mat-menu>
+                  </mat-header-cell>
+                  <mat-cell *matCellDef="let data">{{data.BaseUnit}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                  <mat-header-cell *matHeaderCellDef class="color-white">Action</mat-header-cell>
+                  <mat-cell *matCellDef="let data">{{data.action}}
+                    <button mat-icon-button color="primary" matTooltip="Edit This Row" [matTooltipClass]="'custom-tip'">
+                      <mat-icon aria-label="Edit Row" (click)="updateUOM(data)" class="f-18">
+                        edit
+                      </mat-icon>
+                    </button>
+                  </mat-cell>
+                </ng-container>
+             
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;let i=index" (click)="selection.toggle(row)">
+                </mat-row>
+              </mat-table>
+
+              <mat-paginator [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+              </mat-paginator>
+            </div>
+<!-- 
+            <mat-card *ngIf="!isLoading" 
+            style="display: flex; justify-content: center; align-items: center">
+           <mat-progress-spinner 
+             color="primary" 
+             mode="indeterminate">
+           </mat-progress-spinner>
+         </mat-card> -->
+
+         <app-spinner [showProgress]='!isLoading'></app-spinner>
+
+            <ng-template #uomDialog>
+              <div fxLayout="row" fxLayoutAlign="start  start " fxLayoutGap="10px">
+                <div class="w-100">
+                  <!-- <h6 mat-dialog-title>UOM New
+                    </h6> -->
+                  <mat-toolbar color="primary" fxLayoutAlign="space-between center">
+                    <span>UOM New</span>
+                    <button mat-icon-button>
+                      <mat-icon (click)="closeDialog()">close
+                      </mat-icon>
+                    </button>
+                  </mat-toolbar>
+                </div>
+              </div>
+              <div class="p-24 ">
+                <div fxLayout="column" fxLayoutAlign="start  start " fxLayoutGap="15px">
+                  <div fxLayout="row" fxLayoutGap="10px">
+                    <div>
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="UOMCode" [(ngModel)]="model.UOMCode" name="UOMCode" required>
+                        <mat-error> UOMCode required</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div>
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="UOMName" [(ngModel)]="model.UOMName" name="UOMName" required>
+                        <mat-error> UOMName required</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div fxLayout="row" fxLayoutGap="10px">
+                    <div>
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Multiplier" [(ngModel)]="model.Multifier" name="Multifier"
+                          required>
+                        <mat-error> Multifier required</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div>
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="BaseUnit" [(ngModel)]="model.BaseUnit" name="BaseUnit" required>
+                        <mat-error> BaseUnit required</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+                <div class="buttons" fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px">
+                  <div>
+                    <button (click)="saveUOM()" mat-raised-button color="primary">Save</button>
+                  </div>
+                  <div>
+                    <button (click)="closeDialog()" mat-raised-button color="warn">Close</button>
+                  </div>
+                </div>
+              </div>
+
+            </ng-template>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

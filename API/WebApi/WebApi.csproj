@@ -1,0 +1,506 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2B8EDB55-43F8-42E0-BD97-19DDAD1057A7}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebApi</RootNamespace>
+    <AssemblyName>WebApi</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.WebForms.v12.12.0.0.0\lib\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.4.5\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Swashbuckle.Core.5.6.0\lib\net40\Swashbuckle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.7\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.7\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Tracing, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Tracing.5.0.0\lib\net45\System.Web.Http.Tracing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Unity.Mvc5, Version=1.2.3.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Mvc5.1.2.3\lib\net45\Unity.Mvc5.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Unity.WebApi, Version=5.2.3.0, Culture=neutral, PublicKeyToken=43da31bc42a85347, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.WebAPI.5.2.3\lib\net45\Unity.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="Plugins\iCheck\all.css" />
+    <Content Include="Plugins\iCheck\flat\aero%402x.png" />
+    <Content Include="Plugins\iCheck\flat\aero.css" />
+    <Content Include="Plugins\iCheck\flat\aero.png" />
+    <Content Include="Plugins\iCheck\flat\blue%402x.png" />
+    <Content Include="Plugins\iCheck\flat\blue.css" />
+    <Content Include="Plugins\iCheck\flat\blue.png" />
+    <Content Include="Plugins\iCheck\flat\flat%402x.png" />
+    <Content Include="Plugins\iCheck\flat\flat.css" />
+    <Content Include="Plugins\iCheck\flat\flat.png" />
+    <Content Include="Plugins\iCheck\flat\green%402x.png" />
+    <Content Include="Plugins\iCheck\flat\green.css" />
+    <Content Include="Plugins\iCheck\flat\green.png" />
+    <Content Include="Plugins\iCheck\flat\grey%402x.png" />
+    <Content Include="Plugins\iCheck\flat\grey.css" />
+    <Content Include="Plugins\iCheck\flat\grey.png" />
+    <Content Include="Plugins\iCheck\flat\orange%402x.png" />
+    <Content Include="Plugins\iCheck\flat\orange.css" />
+    <Content Include="Plugins\iCheck\flat\orange.png" />
+    <Content Include="Plugins\iCheck\flat\pink%402x.png" />
+    <Content Include="Plugins\iCheck\flat\pink.css" />
+    <Content Include="Plugins\iCheck\flat\pink.png" />
+    <Content Include="Plugins\iCheck\flat\purple%402x.png" />
+    <Content Include="Plugins\iCheck\flat\purple.css" />
+    <Content Include="Plugins\iCheck\flat\purple.png" />
+    <Content Include="Plugins\iCheck\flat\red%402x.png" />
+    <Content Include="Plugins\iCheck\flat\red.css" />
+    <Content Include="Plugins\iCheck\flat\red.png" />
+    <Content Include="Plugins\iCheck\flat\yellow%402x.png" />
+    <Content Include="Plugins\iCheck\flat\yellow.css" />
+    <Content Include="Plugins\iCheck\flat\yellow.png" />
+    <Content Include="Plugins\iCheck\flat\_all.css" />
+    <Content Include="Plugins\iCheck\futurico\futurico%402x.png" />
+    <Content Include="Plugins\iCheck\futurico\futurico.css" />
+    <Content Include="Plugins\iCheck\futurico\futurico.png" />
+    <Content Include="Plugins\iCheck\icheck.js" />
+    <Content Include="Plugins\iCheck\icheck.min.js" />
+    <Content Include="Plugins\iCheck\line\aero.css" />
+    <Content Include="Plugins\iCheck\line\blue.css" />
+    <Content Include="Plugins\iCheck\line\green.css" />
+    <Content Include="Plugins\iCheck\line\grey.css" />
+    <Content Include="Plugins\iCheck\line\line%402x.png" />
+    <Content Include="Plugins\iCheck\line\line.css" />
+    <Content Include="Plugins\iCheck\line\line.png" />
+    <Content Include="Plugins\iCheck\line\orange.css" />
+    <Content Include="Plugins\iCheck\line\pink.css" />
+    <Content Include="Plugins\iCheck\line\purple.css" />
+    <Content Include="Plugins\iCheck\line\red.css" />
+    <Content Include="Plugins\iCheck\line\yellow.css" />
+    <Content Include="Plugins\iCheck\line\_all.css" />
+    <Content Include="Plugins\iCheck\minimal\aero%402x.png" />
+    <Content Include="Plugins\iCheck\minimal\aero.css" />
+    <Content Include="Plugins\iCheck\minimal\aero.png" />
+    <Content Include="Plugins\iCheck\minimal\blue%402x.png" />
+    <Content Include="Plugins\iCheck\minimal\blue.css" />
+    <Content Include="Plugins\iCheck\minimal\blue.png" />
+    <Content Include="Plugins\iCheck\minimal\green%402x.png" />
+    <Content Include="Plugins\iCheck\minimal\green.css" />
+    <Content Include="Plugins\iCheck\minimal\green.png" />
+    <Content Include="Plugins\iCheck\minimal\grey%402x.png" />
+    <Content Include="Plugins\iCheck\minimal\grey.css" />
+    <Content Include="Plugins\iCheck\minimal\grey.png" />
+    <Content Include="Plugins\iCheck\minimal\minimal%402x.png" />
+    <Content Include="Plugins\iCheck\minimal\minimal.css" />
+    <Content Include="Plugins\iCheck\minimal\minimal.png" />
+    <Content Include="Plugins\iCheck\minimal\orange%402x.png" />
+    <Content Include="Plugins\iCheck\minimal\orange.css" />
+    <Content Include="Plugins\iCheck\minimal\orange.png" />
+    <Content Include="Plugins\iCheck\minimal\pink%402x.png" />
+    <Content Include="Plugins\iCheck\minimal\pink.css" />
+    <Content Include="Plugins\iCheck\minimal\pink.png" />
+    <Content Include="Plugins\iCheck\minimal\purple%402x.png" />
+    <Content Include="Plugins\iCheck\minimal\purple.css" />
+    <Content Include="Plugins\iCheck\minimal\purple.png" />
+    <Content Include="Plugins\iCheck\minimal\red%402x.png" />
+    <Content Include="Plugins\iCheck\minimal\red.css" />
+    <Content Include="Plugins\iCheck\minimal\red.png" />
+    <Content Include="Plugins\iCheck\minimal\yellow%402x.png" />
+    <Content Include="Plugins\iCheck\minimal\yellow.css" />
+    <Content Include="Plugins\iCheck\minimal\yellow.png" />
+    <Content Include="Plugins\iCheck\minimal\_all.css" />
+    <Content Include="Plugins\iCheck\polaris\polaris%402x.png" />
+    <Content Include="Plugins\iCheck\polaris\polaris.css" />
+    <Content Include="Plugins\iCheck\polaris\polaris.png" />
+    <Content Include="Plugins\iCheck\square\aero%402x.png" />
+    <Content Include="Plugins\iCheck\square\aero.css" />
+    <Content Include="Plugins\iCheck\square\aero.png" />
+    <Content Include="Plugins\iCheck\square\blue%402x.png" />
+    <Content Include="Plugins\iCheck\square\blue.css" />
+    <Content Include="Plugins\iCheck\square\blue.png" />
+    <Content Include="Plugins\iCheck\square\green%402x.png" />
+    <Content Include="Plugins\iCheck\square\green.css" />
+    <Content Include="Plugins\iCheck\square\green.png" />
+    <Content Include="Plugins\iCheck\square\grey%402x.png" />
+    <Content Include="Plugins\iCheck\square\grey.css" />
+    <Content Include="Plugins\iCheck\square\grey.png" />
+    <Content Include="Plugins\iCheck\square\orange%402x.png" />
+    <Content Include="Plugins\iCheck\square\orange.css" />
+    <Content Include="Plugins\iCheck\square\orange.png" />
+    <Content Include="Plugins\iCheck\square\pink%402x.png" />
+    <Content Include="Plugins\iCheck\square\pink.css" />
+    <Content Include="Plugins\iCheck\square\pink.png" />
+    <Content Include="Plugins\iCheck\square\purple%402x.png" />
+    <Content Include="Plugins\iCheck\square\purple.css" />
+    <Content Include="Plugins\iCheck\square\purple.png" />
+    <Content Include="Plugins\iCheck\square\red%402x.png" />
+    <Content Include="Plugins\iCheck\square\red.css" />
+    <Content Include="Plugins\iCheck\square\red.png" />
+    <Content Include="Plugins\iCheck\square\square%402x.png" />
+    <Content Include="Plugins\iCheck\square\square.css" />
+    <Content Include="Plugins\iCheck\square\square.png" />
+    <Content Include="Plugins\iCheck\square\yellow%402x.png" />
+    <Content Include="Plugins\iCheck\square\yellow.css" />
+    <Content Include="Plugins\iCheck\square\yellow.png" />
+    <Content Include="Plugins\iCheck\square\_all.css" />
+    <Content Include="Plugins\jquery-2.2.3.min.js" />
+    <Content Include="Plugins\raphael-min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActionFilter\AuthorizationRequiredAttribute.cs" />
+    <Compile Include="ActionFilter\GlobalExceptionAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ActionFilter\LoggingFilterAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Controllers\GrnPOController.cs" />
+    <Compile Include="Controllers\GrnWOController.cs" />
+    <Compile Include="Controllers\Purchase_OrderController.cs" />
+    <Compile Include="Controllers\QCCheckController.cs" />
+    <Compile Include="Controllers\QualityAuditController.cs" />
+    <Compile Include="Controllers\Sales_OrderController.cs" />
+    <Compile Include="Controllers\WorkOrderController.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="report\DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="report\DataSet3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet3.xsd</DependentUpon>
+    </Compile>
+    <Content Include="App_Code\KPMESdtatset1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KPMESdtatset.xsd</DependentUpon>
+    </Content>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controllers\ActionController.cs" />
+    <Compile Include="Controllers\AreaController.cs" />
+    <Compile Include="Controllers\AuthenticateController.cs" />
+    <Compile Include="Controllers\BOM_DetailsController.cs" />
+    <Compile Include="Controllers\BOM_masterController.cs" />
+    <Compile Include="Controllers\CityController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\CountryController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\DesignationController.cs" />
+    <Compile Include="Controllers\EmpAcademicController.cs" />
+    <Compile Include="Controllers\EmpExperienceController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\OrganizationLevelController.cs" />
+    <Compile Include="Controllers\POController.cs" />
+    <Compile Include="Controllers\productMasterController.cs" />
+    <Compile Include="Controllers\productstockController.cs" />
+    <Compile Include="Controllers\PurchaseOrderController.cs" />
+    <Compile Include="Controllers\RawMaterialController.cs" />
+    <Compile Include="Controllers\RawMaterialMasterController.cs" />
+    <Compile Include="Controllers\rawMaterialStockController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\SalesOrderController.cs" />
+    <Compile Include="Controllers\SOController.cs" />
+    <Compile Include="Controllers\SodmController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\SubContractController.cs" />
+    <Compile Include="Controllers\SupplierController.cs" />
+    <Compile Include="Controllers\UOMMasterController.cs" />
+    <Compile Include="Controllers\UserMenuMappingController.cs" />
+    <Compile Include="Controllers\RoleMenuMappingController.cs" />
+    <Compile Include="Controllers\StateController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="ErrorHelper\ApiBusinessException.cs" />
+    <Compile Include="ErrorHelper\ApiDataException.cs" />
+    <Compile Include="ErrorHelper\ApiException.cs" />
+    <Compile Include="ErrorHelper\IApiExceptions.cs" />
+    <Compile Include="Filters\ApiAuthenticationFilter.cs" />
+    <Compile Include="Filters\BasicAuthenticationIdentity.cs" />
+    <Compile Include="Filters\GenericAuthenticationFilter.cs" />
+    <Compile Include="Filters\ValidationActionFilter.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\JSONHelper.cs" />
+    <Compile Include="Helpers\NLogger.cs" />
+    <Compile Include="Helpers\ServiceStatus.cs" />
+    <Compile Include="Helpers\ExcelHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="App_Code\KPMESdtatset.xsc">
+      <DependentUpon>KPMESdtatset.xsd</DependentUpon>
+    </Content>
+    <None Include="App_Code\KPMESdtatset.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>KPMESdtatset1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="App_Code\KPMESdtatset.xss">
+      <DependentUpon>KPMESdtatset.xsd</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\ProjectSoft.pubxml" />
+    <Content Include="report\DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Content>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="report\DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="report\DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Content>
+    <Content Include="report\DataSet3.xsc">
+      <DependentUpon>DataSet3.xsd</DependentUpon>
+    </Content>
+    <None Include="report\DataSet3.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet3.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="report\DataSet3.xss">
+      <DependentUpon>DataSet3.xsd</DependentUpon>
+    </Content>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="APILog\" />
+    <Folder Include="App_Data\" />
+    <Folder Include="Error\" />
+    <Folder Include="Logo\" />
+    <Folder Include="Models\" />
+    <Folder Include="ProfilePictures\" />
+    <Folder Include="UploadedDocuments\ProjectDrawings\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessEntities\BusinessEntities.csproj">
+      <Project>{0c853fa2-2452-42c5-93c4-3702b64d5341}</Project>
+      <Name>BusinessEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessServices\BusinessServices.csproj">
+      <Project>{e36767d7-3272-476e-b5a8-bf06f7ce2992}</Project>
+      <Name>BusinessServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resolver\Resolver.csproj">
+      <Project>{76675642-6587-48c7-b994-08e7514d8f99}</Project>
+      <Name>Resolver</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="report\OrderAcknowledegementReport.rdlc" />
+    <EmbeddedResource Include="report\PurchaseReport.rdlc" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>61367</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:61368/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

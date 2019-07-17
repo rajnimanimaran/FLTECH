@@ -1,0 +1,292 @@
+<div class="container-fluid bg1">
+    <div class="row">
+      <div class="col-sm-12" id="responsive">
+        <div class="new" id="center">
+          <div class="card" id="mainbox" >
+  
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-6" style="padding-top:5px">
+                  <h6 id="h1">Contractor
+                    <span id="h1s">List</span>
+                  </h6>
+                </div>
+                <div class="col-sm-6" style="text-align: right;margin-top:-5px;">
+                  <button id="new" mat-mini-fab>
+                    <i class="material-icons" (click)="addContractor()" matTooltip="Add UOM"
+                      style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
+                      add
+                    </i>
+                  </button>&nbsp;
+                  <button id="cancel" mat-mini-fab>
+                    <i class="material-icons" matTooltip="Exit The Page"
+                      style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
+                      clear
+                    </i>
+                  </button>
+                </div>
+              </div>
+              <hr style="margin-top:0.5rem">
+  
+  
+  
+            
+ 
+              <div class="table-container mat-elevation-z2">
+                  <mat-table class="color-table" #table [dataSource]="dataSource" matSort>
+            
+                    <ng-container matColumnDef="SNo">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                        SNo
+                        <button mat-icon-button [matMenuTriggerFor]="SNoFilter" class="Filter-icon-WT">
+                          <mat-icon aria-label="SNo Filter">keyboard_arrow_down</mat-icon>
+                        </button>
+                        <mat-menu #SNoFilter="matMenu" yPosition="below" [overlapTrigger]="false" xPosition="before">
+                          <div class="info-wrapper menuPop">
+                            <mat-form-field class="w-100 input-label">
+                              <input matInput placeholder="Search SNo" (click)="handleClick($event)" (keyup)="applyFilter($event.target.value)" autofocus>
+                            </mat-form-field>
+                            <div class="ta-w">
+                              <button mat-mini-fab color="warn" class="satPop-ok">
+                                <mat-icon aria-label="Close">close</mat-icon>
+                              </button>
+                            </div>
+                          </div>
+                        </mat-menu>
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let data;let i= index"> {{i+1}} </mat-cell>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="supplierID">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                        supplierID
+                        <button mat-icon-button [matMenuTriggerFor]="supplierIDFilter" class="Filter-icon-WT">
+                          <mat-icon aria-label="Area Filter">keyboard_arrow_down</mat-icon>
+                        </button>
+                        <mat-menu #supplierIDFilter="matMenu" yPosition="below" [overlapTrigger]="false" xPosition="before">
+                          <div class="info-wrapper menuPop">
+                            <mat-form-field class="w-100 input-label">
+                              <input matInput placeholder="Search supplierID." (click)="handleClick($event)" (keyup)="applyFilter($event.target.value)"
+                                autofocus>
+                            </mat-form-field>
+                            <div class="ta-w">
+                              <button mat-mini-fab color="warn" class="satPop-ok">
+                                <mat-icon aria-label="Close">close</mat-icon>
+                              </button>
+                            </div>
+                          </div>
+                        </mat-menu>
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let data">{{data.supplierID}} </mat-cell>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="Name">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                        SupplierName
+                        <button mat-icon-button [matMenuTriggerFor]="SupplierNameFilter" class="Filter-icon-WT">
+                          <mat-icon aria-label="Area Filter">keyboard_arrow_down</mat-icon>
+                        </button>
+                        <mat-menu #SupplierNameFilter="matMenu" yPosition="below" [overlapTrigger]="false" xPosition="before">
+                          <div class="info-wrapper menuPop">
+                            <mat-form-field class="w-100 input-label">
+                              <input matInput placeholder="Search SupplierName." (click)="handleClick($event)" (keyup)="applyFilter($event.target.value)" autofocus>
+                            </mat-form-field>
+                            <div class="ta-w">
+                              <button mat-mini-fab color="warn" class="satPop-ok">
+                                <mat-icon aria-label="Close">close</mat-icon>
+                              </button>
+                            </div>
+                          </div>
+                        </mat-menu>
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let data"> {{data.Name}}</mat-cell>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="Address">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                        Address
+                        <button mat-icon-button [matMenuTriggerFor]="AddressFilter" class="Filter-icon-WT">
+                          <mat-icon aria-label="Area Filter">keyboard_arrow_down</mat-icon>
+                        </button>
+                        <mat-menu #AddressFilter="matMenu" yPosition="below" [overlapTrigger]="false" xPosition="before">
+                          <div class="info-wrapper menuPop">
+                            <mat-form-field class="w-100 input-label">
+                              <input matInput placeholder="Search Address." (click)="handleClick($event)" (keyup)="applyFilter($event.target.value)" autofocus>
+                            </mat-form-field>
+                            <div class="ta-w">
+                              <button mat-mini-fab color="warn" class="satPop-ok">
+                                <mat-icon aria-label="Close">close</mat-icon>
+                              </button>
+                            </div>
+                          </div>
+                        </mat-menu>
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let data"> {{data.Address}}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="GstNo">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                        GstNo
+                        <button mat-icon-button [matMenuTriggerFor]="GstNoFilter" class="Filter-icon-WT">
+                          <mat-icon aria-label="Area Filter">keyboard_arrow_down</mat-icon>
+                        </button>
+                        <mat-menu #GstNoFilter="matMenu" yPosition="below" [overlapTrigger]="false" xPosition="before">
+                          <div class="info-wrapper menuPop">
+                            <mat-form-field class="w-100 input-label">
+                              <input matInput placeholder="Search GstNo." (click)="handleClick($event)" (keyup)="applyFilter($event.target.value)"
+                                autofocus>
+                            </mat-form-field>
+                            <div class="ta-w">
+                              <button mat-mini-fab color="warn" class="satPop-ok">
+                                <mat-icon aria-label="Close">close</mat-icon>
+                              </button>
+                            </div>
+                          </div>
+                        </mat-menu>
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let data">{{data.GstNo}} </mat-cell>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="contactNumber">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                        contactNumber
+                        <button mat-icon-button [matMenuTriggerFor]="contactNumberFilter" class="Filter-icon-WT">
+                          <mat-icon aria-label="Area Filter">keyboard_arrow_down</mat-icon>
+                        </button>
+                        <mat-menu #contactNumberFilter="matMenu" yPosition="below" [overlapTrigger]="false" xPosition="before">
+                          <div class="info-wrapper menuPop">
+                            <mat-form-field class="w-100 input-label">
+                              <input matInput placeholder="Search contactNumber." (click)="handleClick($event)" (keyup)="applyFilter($event.target.value)" autofocus>
+                            </mat-form-field>
+                            <div class="ta-w">
+                              <button mat-mini-fab color="warn" class="satPop-ok">
+                                <mat-icon aria-label="Close">close</mat-icon>
+                              </button>
+                            </div>
+                          </div>
+                        </mat-menu>
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let data">{{data.contactNumber}} </mat-cell>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="emailID">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
+                        emailID
+                        <button mat-icon-button [matMenuTriggerFor]="emailIDFilter" class="Filter-icon-WT">
+                          <mat-icon aria-label="Area Filter">keyboard_arrow_down</mat-icon>
+                        </button>
+                        <mat-menu #emailIDFilter="matMenu" yPosition="below" [overlapTrigger]="false" xPosition="before">
+                          <div class="info-wrapper menuPop">
+                            <mat-form-field class="w-100 input-label">
+                              <input matInput placeholder="Search emailID." (click)="handleClick($event)" (keyup)="applyFilter($event.target.value)"
+                                autofocus>
+                            </mat-form-field>
+                            <div class="ta-w">
+                              <button mat-mini-fab color="warn" class="satPop-ok">
+                                <mat-icon aria-label="Close">close</mat-icon>
+                              </button>
+                            </div>
+                          </div>
+                        </mat-menu>
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let data">{{data.emailID}} </mat-cell>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="action">
+                      <mat-header-cell *matHeaderCellDef class="color-white">Action</mat-header-cell>
+                      <mat-cell *matCellDef="let data">{{data.action}}
+                        <button mat-icon-button color="primary" matTooltip="Edit This Row" [matTooltipClass]="'custom-tip'">
+                          <mat-icon aria-label="Edit Row" (click)="updateContract(data)" class="f-18">
+                            edit
+                          </mat-icon>
+                        </button>
+                      </mat-cell>
+                    </ng-container>
+            
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;let i=index" (click)="selection.toggle(row)">
+                    </mat-row>
+                  </mat-table>
+            
+                  <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+                  </mat-paginator>
+                </div>
+  
+                <app-spinner [showProgress]='!isLoading'></app-spinner>
+                
+              <ng-template #ContractorDialog>
+                <div fxLayout="row" fxLayoutAlign="start  start " fxLayoutGap="10px">
+                  <div class="w-100">
+                    <!-- <h6 mat-dialog-title>UOM New
+                      </h6> -->
+                    <mat-toolbar color="primary" fxLayoutAlign="space-between center">
+                      <span>Contractor New</span>
+                      <button mat-icon-button >
+                        <mat-icon (click)="closeDialog()">close
+                        </mat-icon></button>
+                    </mat-toolbar>
+                  </div>
+                </div>
+                <div class="p-24 ">
+                  <div fxLayout="column" fxLayoutAlign="start  start " fxLayoutGap="15px">
+                    <div fxLayout="row" fxLayoutGap="10px">
+                      <div>
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="supplierID" [(ngModel)]="model.supplierID" name="supplierID" required>
+                              <mat-error> supplierID required</mat-error>
+                            </mat-form-field>
+                      </div>
+                      <div>
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="SupplierName" [(ngModel)]="model.Name" name="Name"  required>
+                              <mat-error> SupplierName required</mat-error>
+                            </mat-form-field>
+                      </div>
+                    </div>
+                    <div fxLayout="row" fxLayoutGap="10px">
+                      <div>
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="Address" [(ngModel)]="model.Address" name="Address" required>
+                              <mat-error> Address required</mat-error>
+                            </mat-form-field>
+                      </div>
+                      <div>
+                          <mat-form-field class="example-full-width">
+                              <input matInput placeholder="GstNo" [(ngModel)]="model.GstNo" name="GstNo" required>
+                              <mat-error> GstNo required</mat-error>
+                            </mat-form-field>
+                      </div>
+                    </div>
+                    <div fxLayout="row" fxLayoutGap="10px">
+                        <div>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="contactNumber" type="number" [(ngModel)]="model.contactNumber" name="contactNumber" required>
+                                <mat-error> contactNumber required</mat-error>
+                              </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="emailID" [(ngModel)]="model.emailID" name="emailID" required>
+                                <mat-error> emailID required</mat-error>
+                              </mat-form-field>
+                        </div>
+                      </div>
+
+                  </div>
+                  <div class="buttons" fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10px">
+                    <div>
+                        <button (click)="saveContract()" mat-raised-button color="primary">Save</button>
+                    </div>
+                    <div>
+                      <button (click)="closeDialog()" mat-raised-button color="warn">Close</button>
+                    </div>
+                  </div>
+                </div>
+  
+              </ng-template>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E36767D7-3272-476E-B5A8-BF06F7CE2992}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessServices</RootNamespace>
+    <AssemblyName>BusinessServices</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Bson, Version=2.4.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Bson.2.4.4\lib\net45\MongoDB.Bson.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Driver, Version=2.4.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.2.4.4\lib\net45\MongoDB.Driver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MongoDB.Driver.Core, Version=2.4.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.Core.2.4.4\lib\net45\MongoDB.Driver.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Administrator\Action\ActionServices.cs" />
+    <Compile Include="Administrator\Action\IActionServices.cs" />
+    <Compile Include="Grn\GrnPO\GrnPOService.cs" />
+    <Compile Include="Grn\GrnPO\IGrnPOService.cs" />
+    <Compile Include="Grn\GrnWO\GrnWOService.cs" />
+    <Compile Include="Grn\GrnWO\IGrnWOService.cs" />
+    <Compile Include="Human Resource\Employee Academy\EmployeeAcdemyService.cs" />
+    <Compile Include="Human Resource\Employee Academy\IEmployeeAcademyService.cs" />
+    <Compile Include="Human Resource\EmployeeExperience\EmployeeExperienceService.cs" />
+    <Compile Include="Human Resource\EmployeeExperience\IEmployeeExperienceService.cs" />
+    <Compile Include="Administrator\LocationService\Area\AreaServices.cs" />
+    <Compile Include="Administrator\LocationService\Area\IAreaServices.cs" />
+    <Compile Include="Administrator\LocationService\CityService\CityService.cs" />
+    <Compile Include="Administrator\LocationService\CityService\ICityService.cs" />
+    <Compile Include="CodeGeneratorcategory.cs" />
+    <Compile Include="Common\CodeGenerator.cs" />
+    <Compile Include="Common\CommonService.cs" />
+    <Compile Include="Common\LinqHelpers.cs" />
+    <Compile Include="Human Resource\CompanyServices\CompanyServices.cs" />
+    <Compile Include="Human Resource\CompanyServices\ICompanyServices.cs" />
+    <Compile Include="Administrator\LocationService\Country\CountryServices.cs" />
+    <Compile Include="Administrator\LocationService\Country\ICountryService.cs" />
+    <Compile Include="Human Resource\Department\DepartmentServices.cs" />
+    <Compile Include="Human Resource\Department\IDepartmentServices.cs" />
+    <Compile Include="DependencyResolver.cs" />
+    <Compile Include="Human Resource\DesignationServices\DesignationService.cs" />
+    <Compile Include="Human Resource\DesignationServices\IDesignationService.cs" />
+    <Compile Include="Human Resource\Employee\EmployeeServices.cs" />
+    <Compile Include="Human Resource\Employee\IEmployeeServices.cs" />
+    <Compile Include="Administrator\Menu\IMenuServices.cs" />
+    <Compile Include="Administrator\Menu\MenuServices.cs" />
+    <Compile Include="Administrator\OrganizationLevel\IOrganizationLevelServices.cs" />
+    <Compile Include="Administrator\OrganizationLevel\OrganizationLevelServices.cs" />
+    <Compile Include="Administrator\UserMenuMapping\IUserMenuMappingServices.cs" />
+    <Compile Include="Administrator\UserMenuMapping\UserMenuMappingServices.cs" />
+    <Compile Include="Administrator\RoleMenuMapping\IRoleMenuMappingServices.cs" />
+    <Compile Include="Administrator\RoleMenuMapping\RoleMenuMappingServices.cs" />
+    <Compile Include="Administrator\Role\IRoleServices.cs" />
+    <Compile Include="Administrator\Role\RoleServices.cs" />
+    <Compile Include="Administrator\LocationService\State\IStateServices.cs" />
+    <Compile Include="Administrator\LocationService\State\StateServices.cs" />
+    <Compile Include="Administrator\Token\ITokenServices.cs" />
+    <Compile Include="Master1\BOM_Details\BOM_DetailsServices.cs" />
+    <Compile Include="Master1\BOM_Details\IBOM_DetailsServices.cs" />
+    <Compile Include="Master1\BOM_Master\BOMmasterServices.cs" />
+    <Compile Include="Master1\BOM_Master\IBOMmasterServices.cs" />
+    <Compile Include="Master1\Customer\CustomerService.cs" />
+    <Compile Include="Master1\Customer\ICustomerService.cs" />
+    <Compile Include="Master1\POMaster\IPOMasterService.cs" />
+    <Compile Include="Master1\POMaster\POMasterService.cs" />
+    <Compile Include="Master1\ProductStock\IProductStockService.cs" />
+    <Compile Include="Master1\ProductStock\ProductStockService.cs" />
+    <Compile Include="Master1\Product\IproductService.cs" />
+    <Compile Include="Master1\Product\productService.cs" />
+    <Compile Include="Master1\Purchase Order\IPurchaseOrderService.cs" />
+    <Compile Include="Master1\Purchase Order\PurchaseOrderService.cs" />
+    <Compile Include="Master1\purchase_Order\IPurchaseOrderMasterService.cs" />
+    <Compile Include="Master1\purchase_Order\PurchaseOrderMasterService.cs" />
+    <Compile Include="Master1\RawMaterial\IRawMaterialService.cs" />
+    <Compile Include="Master1\RawMaterial\RawMaterialService.cs" />
+    <Compile Include="Master1\SalesOrder\ISalesOrderService.cs" />
+    <Compile Include="Master1\SalesOrder\SalesOrderService.cs" />
+    <Compile Include="Master1\SOMaster\ISOMasterService.cs" />
+    <Compile Include="Master1\SOMaster\SOMasterService.cs" />
+    <Compile Include="Master1\StockRawMaterial\Irmstockservice.cs" />
+    <Compile Include="Master1\StockRawMaterial\rawmaterialStockServices.cs" />
+    <Compile Include="Master1\SubContract\ISubCont.cs" />
+    <Compile Include="Master1\SubContract\SubContService.cs" />
+    <Compile Include="Master1\Supplier\ISupplierservice.cs" />
+    <Compile Include="Master1\Supplier\Supplierservice.cs" />
+    <Compile Include="Master1\UOM\IUOMMasterService.cs" />
+    <Compile Include="Master1\UOM\UOMMasterService.cs" />
+    <Compile Include="Master1\WorkOrderMaster\IWorkOrderService.cs" />
+    <Compile Include="Master1\WorkOrderMaster\WorkOrderService.cs" />
+    <Compile Include="Master\QualtiyCheck\IQualityCheckService.cs" />
+    <Compile Include="Master\QualtiyCheck\QualityCheckService.cs" />
+    <Compile Include="Master\RawMaterial\IRawMaterialServices.cs" />
+    <Compile Include="Master\RawMaterial\RawMaterialServices.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Administrator\Token\TokenServices.cs" />
+    <Compile Include="Administrator\User\IUserServices.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Administrator\User\UserServices.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="QualityAudit\IQualityAuditService.cs" />
+    <Compile Include="QualityAudit\QualityAuditService.cs" />
+    <Compile Include="Sales_Order\ISalesOrderService.cs" />
+    <Compile Include="Sales_Order\SalesOrderService.cs" />
+    <Compile Include="sodm\IsodmService.cs" />
+    <Compile Include="sodm\sodmService.cs" />
+    <Compile Include="Student\IStudentService.cs" />
+    <Compile Include="Student\StudentService.cs" />
+    <Compile Include="Utility\Secures.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessEntities\BusinessEntities.csproj">
+      <Project>{0c853fa2-2452-42c5-93c4-3702b64d5341}</Project>
+      <Name>BusinessEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataModel\DataModel.csproj">
+      <Project>{6df665a5-306d-48f8-8e3f-6a50ce488c24}</Project>
+      <Name>DataModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resolver\Resolver.csproj">
+      <Project>{76675642-6587-48c7-b994-08e7514d8f99}</Project>
+      <Name>Resolver</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

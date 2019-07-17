@@ -1,0 +1,39 @@
+.card-body{
+    padding: 1.75rem !important
+}
+#center {
+    margin-top: 6%;
+    width: 1200px;
+}
+#new {
+    background-color: #3E6854
+}
+#responsive {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 12px
+}
+.bg1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+}
+.mat-mini-fab {
+    height: 30px;
+    width: 30px
+}
+
+  .radiobtnfont{
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .workorder{
+      width: 15%;
+  }
+  .QCtable{
+      width: 95%;
+  }
