@@ -8,6 +8,7 @@ import { FormGroup, Validators } from '@angular/forms';
 export class SalesOrderMaster {
   OrderID: Number;
   detlId: String;
+  OrderSetID: Number;
 }
 export interface planning {
   quantity: Number;
@@ -31,6 +32,7 @@ export class PlanningComponent implements OnInit {
   displayedColumns = ['quantity', 'deliverydate','action'];
   codeList = [];
   model1: SalesOrderMaster = new SalesOrderMaster();
+  Btntitle : string = 'Save'
   // ELEMENT_DATA2: plandetail[] = [
   //   {fields: 'Material Recieve in Factory'},
   //   {fields: 'Material in Flow'},
@@ -52,6 +54,8 @@ export class PlanningComponent implements OnInit {
   categoryModel: any = [];
   show = false;
   model: any = {}
+  plan: any = {};
+  isEditing = false;
   getSalesData: any = [];
   getSalesPlanned = [];
   salesOrderData = new MatTableDataSource<any>(this.getSalesData);
@@ -63,6 +67,8 @@ export class PlanningComponent implements OnInit {
   OrderFormDetail = [];
   totalQuantity: any;
   planningView:any;
+  disableAddPlan=false;
+  grantQty: any;
   constructor(
     private _salesorderservice: SalesOrderMasterService,
     private _datePipe: DatePipe, private _dialog: MatDialog,
@@ -75,6 +81,7 @@ export class PlanningComponent implements OnInit {
       quantity: ['', [Validators.required]],
       sORefID: ['', Validators.required],
       sOID: ['', Validators.required],
+      OrderSetID: [0],
       deliveryDate: ['', Validators.required],
       ordAckSdate: ['', [Validators.required]],
       ordAckEdate: ['', [Validators.required]],
@@ -111,14 +118,14 @@ export class PlanningComponent implements OnInit {
     });
   }
   savePlanningDetails() {
-    debugger
     this.PlanningForm.controls.sOID.setValue(this.model1.OrderID);
     this.PlanningForm.controls.sORefID.setValue(this.model1.detlId);
     if (this.PlanningForm.valid) {
       this._salesorderservice.saveSOPlanning(this.PlanningForm.value).subscribe(resp => {
         if (resp) {
           this._dialog.closeAll();
-          this.addPlan(this.model1.detlId,this.totalQuantity)
+          this.addPlan(this.model1.detlId,this.totalQuantity);
+          this.isEditing=false;
         }
       })
     }
@@ -137,19 +144,21 @@ export class PlanningComponent implements OnInit {
     });
   }
   getGrandquantity() {
-    return this.getSalesPlanned.map(t => t.Quantity).reduce((acc, value) => acc + value, 0);
+    this.grantQty= this.getSalesPlanned.map(t => t.Quantity).reduce((acc, value) => acc + value, 0);
   }
   @ViewChild('quantity') inputEl: ElementRef;
   checkQuantity(qty) {
-    if (qty > this.totalQuantity - this.getGrandquantity()) {
-      alert("Entered Quantity should be lesser than " + "" + (this.totalQuantity - this.getGrandquantity()))
+    debugger;
+   
+    if (qty > this.totalQuantity - this.grantQty) {
+      alert("Entered Quantity should be lesser than " + "" + (this.totalQuantity - this.grantQty))
       setTimeout(() => this.inputEl.nativeElement.focus());
     }
   }
   addPlan(detlId, Quantity) {
-    debugger;
+    this.disableAddPlan = false;
     this.totalQuantity = Quantity;
-    this.model1.detlId = detlId;
+    this.model1.detlId = detlId;    
     this.show = true;
     this._salesorderservice.getSalesOrderPlan(detlId).subscribe(response => {
       if (response) {
@@ -159,6 +168,10 @@ export class PlanningComponent implements OnInit {
         this.dataSource1 = new MatTableDataSource(this.getSalesPlanned);
         console.log(this.getSalesPlanned)
       }
+      this.getGrandquantity();
+       if(this.grantQty===this.totalQuantity){
+         this.disableAddPlan =true;
+       }
     });
   }
 
@@ -190,12 +203,30 @@ export class PlanningComponent implements OnInit {
       width: '800px',
     })
   }
+
+  updatePlanDetailsgrid(data){
+    debugger;
+    this.Btntitle  = 'Update';
+    this.isEditing = true;
+    this.PlanningForm.controls.OrderSetID.setValue(data.OrderSetID);
+    // this.planningView=data;
+    this.model = data;
+    this._dialog.open(this.PlanDialog, {
+      panelClass: 'Dialog',
+      width: '800px',
+      height: '700px',
+      disableClose: true
+    })
+  }
   closeDialog() {
+    this.isEditing = false;
     this._dialog.closeAll();
   }
 
   openPlanDetail() {
     this.PlanningForm.reset();
+    this.model={};
+    this.Btntitle  = 'Save';
     this._dialog.open(this.PlanDialog, {
       panelClass: 'Dialog',
       width: '800px',

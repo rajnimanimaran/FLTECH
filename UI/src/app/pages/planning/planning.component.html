@@ -1,491 +1,539 @@
 <div class="container-fluid bg1">
-  <div class="row">
-    <div class="col-sm-12" id="responsive">
-      <div class="new" id="center">
-        <div class="card" id="mainbox" [class.fullScreen]="screenfullClicked">
-          <div *ngIf='!show' class="card-body">
-            <div class="row">
-              <div class="col-sm-6" style="padding-top:5px">
-                <h6 id="h1">Planning
-                  <span id="h1s">List</span>
-                </h6>
+    <div class="row">
+      <div class="col-sm-12" id="responsive">
+        <div class="new" id="center">
+          <div class="card" id="mainbox" [class.fullScreen]="screenfullClicked">
+            <div *ngIf='!show' class="card-body">
+              <div class="row">
+                <div class="col-sm-6" style="padding-top:5px">
+                  <h6 id="h1">Planning
+                    <span id="h1s">List</span>
+                  </h6>
+                </div>
+              </div>
+  
+              <div class="row">
+                <div class="col-sm-3">
+                  <mat-form-field class="example-full-width">
+                    <mat-select placeholder="Sales Order Code" (selectionChange)="getSoDetails($event)">
+                      <mat-option *ngFor="let c of codeList" [value]="c">{{c.CODE}}</mat-option>
+                    </mat-select>
+                    <!-- <mat-error> OrderCode required</mat-error> -->
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- (ngModelChange)="getSoDetails(model.OrderID)" -->
+              <!-- 
+              <hr style="margin-top:0.5rem"> -->
+              <div class="row">
+                <div class="col-sm-12">
+                  <!-- <mat-form-field>
+                    <input matInput placeholder="Global Filter (Type BillNo, BillDate, VendorName..)"
+                      (keyup)="applyFilter($event.target.value)">
+                  </mat-form-field> -->
+  
+  
+                  <div class="table-container mat-elevation-z2">
+                    <mat-table class="color-table" #table [dataSource]="salesOrderData" matSort>
+                      <ng-container matColumnDef="S.No">
+                        <mat-header-cell *matHeaderCellDef style="text-align: center;"> SNo </mat-header-cell>
+                        <mat-cell *matCellDef="let OrderFormDetail;let i =index" style="text-align: center;"> {{i+1}}
+                        </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="ProductName">
+                        <mat-header-cell *matHeaderCellDef style="text-align: center;"> Product Name </mat-header-cell>
+                        <mat-cell *matCellDef="let OrderFormDetail;let i =index" style="text-align: center;">
+                          {{OrderFormDetail.prdName}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="quantity">
+                        <mat-header-cell *matHeaderCellDef style="text-align: center;"> Quantity </mat-header-cell>
+                        <mat-cell *matCellDef="let OrderFormDetail;let i =index" style="text-align: center;">
+                          {{OrderFormDetail.Quantity}} </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="UOM">
+                        <mat-header-cell *matHeaderCellDef style="text-align: center;"> UOM </mat-header-cell>
+                        <mat-cell *matCellDef="let OrderFormDetail;let i =index" style="text-align: center;">
+                          {{OrderFormDetail.UOMName}}
+                        </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="action">
+                        <mat-header-cell *matHeaderCellDef class="color-white">Action</mat-header-cell>
+                        <mat-cell *matCellDef="let data">{{data.action}}
+                          <!-- <button mat-icon-button color="primary" matTooltip="Edit This Row"
+                            [matTooltipClass]="'custom-tip'">
+                            <mat-icon aria-label="Edit Row" (click)="updatesalesDetailsgrid(data)" class="f-18">
+                              edit
+                            </mat-icon>
+                          </button> -->
+                          <!-- <button mat-icon-button color="warn" matTooltip="view" [matTooltipClass]="'custom-tip'">
+                            <i class="material-icons" style="color: green" (click)="openPlanDetails(data)">
+                              remove_red_eye
+                            </i>
+                          </button> -->
+                          <button mat-icon-button color="warn" (click)="addPlan(data.DetlID,data.Quantity)"
+                            matTooltip="Plan this material" 
+                            [matTooltipClass]="'custom-tip'">
+                            <i class="material-icons" style="color: rgb(50, 50, 206)">
+                              assignment
+                            </i>
+                          </button>
+                        </mat-cell>
+                      </ng-container>
+                      <mat-header-row *matHeaderRowDef="displayedgridcolumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedgridcolumns;let i=index">
+                      </mat-row>
+                    </mat-table>
+  
+                    <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+                      [showFirstLastButtons]="true">
+                    </mat-paginator>
+                  </div>
+                  <app-spinner [showProgress]='!isLoading'></app-spinner>
+                </div>
               </div>
             </div>
-
-            <div class="row">
-              <div class="col-sm-3">
-                <mat-form-field class="example-full-width">
-                  <mat-select placeholder="Sales Order Code" (selectionChange)="getSoDetails($event)">
-                    <mat-option *ngFor="let c of codeList" [value]="c">{{c.CODE}}</mat-option>
-                  </mat-select>
-                  <!-- <mat-error> OrderCode required</mat-error> -->
-                </mat-form-field>
+  
+            <div *ngIf='show' class="card-body">
+              <div class="row">
+                <div class="col-sm-6" style="padding-top:5px">
+                  <h6 id="h1">Add
+                    <span id="h1s">Planning</span>
+                  </h6>
+                </div>
+                <div class="col-sm-6" style="text-align: right;margin-top:-5px;">
+                  <button id="cancel" mat-mini-fab (click)="closeaddplan()">
+                    <i class="material-icons" matTooltip="Exit The Page"
+                      style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
+                      clear
+                    </i>
+                  </button>
+                </div>
               </div>
-            </div>
-            <!-- (ngModelChange)="getSoDetails(model.OrderID)" -->
-            <!-- 
-            <hr style="margin-top:0.5rem"> -->
-            <div class="row">
-              <div class="col-sm-12">
-                <!-- <mat-form-field>
-                  <input matInput placeholder="Global Filter (Type BillNo, BillDate, VendorName..)"
-                    (keyup)="applyFilter($event.target.value)">
-                </mat-form-field> -->
-
-
-                <div class="table-container mat-elevation-z2">
-                  <mat-table class="color-table" #table [dataSource]="salesOrderData" matSort>
-                    <ng-container matColumnDef="S.No">
-                      <mat-header-cell *matHeaderCellDef style="text-align: center;"> SNo </mat-header-cell>
-                      <mat-cell *matCellDef="let OrderFormDetail;let i =index" style="text-align: center;"> {{i+1}}
-                      </mat-cell>
-                    </ng-container>
-                    <ng-container matColumnDef="ProductName">
-                      <mat-header-cell *matHeaderCellDef style="text-align: center;"> Product Name </mat-header-cell>
-                      <mat-cell *matCellDef="let OrderFormDetail;let i =index" style="text-align: center;">
-                        {{OrderFormDetail.prdName}}</mat-cell>
-                    </ng-container>
+  
+              <hr style="margin-top:0.5rem">
+              <div>
+                <button mat-raised-button color="primary" [disabled]="disableAddPlan" (click)="openPlanDetail()">
+                  <i class="material-icons">add</i>Add
+                </button>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-sm-4">
+                  <mat-table [dataSource]="dataSource1" class="mat-elevation-z8">
                     <ng-container matColumnDef="quantity">
                       <mat-header-cell *matHeaderCellDef style="text-align: center;"> Quantity </mat-header-cell>
-                      <mat-cell *matCellDef="let OrderFormDetail;let i =index" style="text-align: center;">
-                        {{OrderFormDetail.Quantity}} </mat-cell>
+                      <mat-cell *matCellDef="let data;let i =index" style="text-align: center;">
+                        {{data.Quantity}} </mat-cell>
                     </ng-container>
-                    <ng-container matColumnDef="UOM">
-                      <mat-header-cell *matHeaderCellDef style="text-align: center;"> UOM </mat-header-cell>
-                      <mat-cell *matCellDef="let OrderFormDetail;let i =index" style="text-align: center;">
-                        {{OrderFormDetail.UOMName}}
-                      </mat-cell>
+                    <ng-container matColumnDef="deliverydate">
+                      <mat-header-cell *matHeaderCellDef style="text-align: center;"> Delivery Date </mat-header-cell>
+                      <mat-cell *matCellDef="let data;let i =index" style="text-align: center;">
+                        {{data.Deliverydate| date: 'dd/MM/yyyy'}} </mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="action">
                       <mat-header-cell *matHeaderCellDef class="color-white">Action</mat-header-cell>
                       <mat-cell *matCellDef="let data">{{data.action}}
-                        <!-- <button mat-icon-button color="primary" matTooltip="Edit This Row"
-                          [matTooltipClass]="'custom-tip'">
-                          <mat-icon aria-label="Edit Row" (click)="updatesalesDetailsgrid(data)" class="f-18">
-                            edit
-                          </mat-icon>
-                        </button> -->
-                        <!-- <button mat-icon-button color="warn" matTooltip="view" [matTooltipClass]="'custom-tip'">
+  
+                        <button mat-icon-button color="warn" matTooltip="view" [matTooltipClass]="'custom-tip'">
                           <i class="material-icons" style="color: green" (click)="openPlanDetails(data)">
                             remove_red_eye
                           </i>
-                        </button> -->
-                        <button mat-icon-button color="warn" (click)="addPlan(data.DetlID,data.Quantity)"
-                          matTooltip="Plan this material" [disabled]="data.Planned===true"
+                        </button>
+                        <button mat-icon-button color="primary" matTooltip="Edit This Row"
                           [matTooltipClass]="'custom-tip'">
-                          <i class="material-icons" style="color: rgb(50, 50, 206)">
-                            assignment
-                          </i>
+                          <mat-icon aria-label="Edit Row" (click)="updatePlanDetailsgrid(data)" class="f-18">
+                            edit
+                          </mat-icon>
                         </button>
                       </mat-cell>
                     </ng-container>
-                    <mat-header-row *matHeaderRowDef="displayedgridcolumns"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: displayedgridcolumns;let i=index">
-                    </mat-row>
+  
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
                   </mat-table>
-
-                  <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
-                    [showFirstLastButtons]="true">
-                  </mat-paginator>
                 </div>
-                <app-spinner [showProgress]='!isLoading'></app-spinner>
               </div>
+              <hr />
             </div>
-          </div>
-
-          <div *ngIf='show' class="card-body">
-            <div class="row">
-              <div class="col-sm-6" style="padding-top:5px">
-                <h6 id="h1">Add
-                  <span id="h1s">Planning</span>
-                </h6>
-              </div>
-              <div class="col-sm-6" style="text-align: right;margin-top:-5px;">
-                <button id="cancel" mat-mini-fab (click)="closeaddplan()">
-                  <i class="material-icons" matTooltip="Exit The Page"
-                    style="margin-top: -10px;cursor: pointer;font-size:20px;color:white">
-                    clear
-                  </i>
-                </button>
-              </div>
-            </div>
-
-            <hr style="margin-top:0.5rem">
-            <div>
-              <button mat-raised-button color="primary" (click)="openPlanDetail()">
-                <i class="material-icons">add</i>Add
-              </button>
-            </div>
-            <br>
-            <div class="row">
-              <div class="col-sm-4">
-                <mat-table [dataSource]="dataSource1" class="mat-elevation-z8">
-                  <ng-container matColumnDef="quantity">
-                    <mat-header-cell *matHeaderCellDef style="text-align: center;"> Quantity </mat-header-cell>
-                    <mat-cell *matCellDef="let data;let i =index" style="text-align: center;">
-                      {{data.Quantity}} </mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="deliverydate">
-                    <mat-header-cell *matHeaderCellDef style="text-align: center;"> Delivery Date </mat-header-cell>
-                    <mat-cell *matCellDef="let data;let i =index" style="text-align: center;">
-                      {{data.Deliverydate| date: 'dd/MM/yyyy'}} </mat-cell>
-                  </ng-container>
-                  <ng-container matColumnDef="action">
-                    <mat-header-cell *matHeaderCellDef class="color-white">Action</mat-header-cell>
-                    <mat-cell *matCellDef="let data">{{data.action}}
-
-                      <button mat-icon-button color="warn" matTooltip="view" [matTooltipClass]="'custom-tip'">
-                        <i class="material-icons" style="color: green" (click)="openPlanDetails(data)">
-                          remove_red_eye
-                        </i>
-                      </button>
-                      <button mat-icon-button color="primary" matTooltip="Edit This Row"
-                        [matTooltipClass]="'custom-tip'">
-                        <mat-icon aria-label="Edit Row" (click)="updatesalesDetailsgrid(data)" class="f-18">
-                          edit
-                        </mat-icon>
-                      </button>
-                    </mat-cell>
-                  </ng-container>
-
-                  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-                </mat-table>
-              </div>
-            </div>
-            <hr />
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-<ng-template #PlanDialog>
-  <div class="w-100">
-    <mat-toolbar color="primary" fxLayoutAlign="space-between center">
-      <span> Planning Details </span>
-      <button mat-icon-button>
-        <mat-icon (click)="closeDialog()">close
-        </mat-icon>
-      </button>
-    </mat-toolbar>
-  </div>
-  <div class="p-24">
-
-
-    <!-- 
-    <mat-table [dataSource]="dataSource2" class="mat-elevation-z8">
-      <ng-container matColumnDef="fields">
-        <mat-header-cell *matHeaderCellDef style="text-align: center;"> Fields </mat-header-cell>
-        <mat-cell *matCellDef="let data;let i =index" style="text-align: center;">
-          {{data.fields}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="startdate">
-        <mat-header-cell *matHeaderCellDef style="text-align: center;"> Start Date </mat-header-cell>
-        <mat-cell *matCellDef="let data;let i =index" style="text-align: center;">
-          <mat-form-field>
-            <input matInput [matDatepicker]="picker1" placeholder="Start Date">
-            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker #picker1></mat-datepicker>
-          </mat-form-field>
-        </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="enddate">
-        <mat-header-cell *matHeaderCellDef style="text-align: center;"> End Date </mat-header-cell>
-        <mat-cell *matCellDef="let data;let i =index" style="text-align: center;">
-          <mat-form-field>
-            <input matInput [matDatepicker]="picker2" placeholder="End Date">
-            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2></mat-datepicker>
-          </mat-form-field>
-        </mat-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns1;"></mat-row>
-    </mat-table> -->
-    <form [formGroup]="PlanningForm">
-      <div class="row">
-        <div class="col-sm-3">
-          <mat-form-field>
-            <input matInput required placeholder="Quantity" [(ngModel)]="model.quantity" #quantity
-              (blur)="checkQuantity(model.quantity)" formControlName="quantity" required>
-            <mat-error *ngIf="PlanningForm.get('quantity').invalid">This is required field</mat-error>
-          </mat-form-field>
+  
+  <ng-template #PlanDialog>
+    <div class="w-100">
+      <mat-toolbar color="primary" fxLayoutAlign="space-between center">
+        <span> Planning Details </span>
+        <button mat-icon-button>
+          <mat-icon (click)="closeDialog()">close
+          </mat-icon>
+        </button>
+      </mat-toolbar>
+    </div>
+    <div class="p-24">
+  
+  
+      <!-- 
+      <mat-table [dataSource]="dataSource2" class="mat-elevation-z8">
+        <ng-container matColumnDef="fields">
+          <mat-header-cell *matHeaderCellDef style="text-align: center;"> Fields </mat-header-cell>
+          <mat-cell *matCellDef="let data;let i =index" style="text-align: center;">
+            {{data.fields}} </mat-cell>
+        </ng-container>
+  
+        <ng-container matColumnDef="startdate">
+          <mat-header-cell *matHeaderCellDef style="text-align: center;"> Start Date </mat-header-cell>
+          <mat-cell *matCellDef="let data;let i =index" style="text-align: center;">
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker1" placeholder="Start Date">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+          </mat-cell>
+        </ng-container>
+  
+        <ng-container matColumnDef="enddate">
+          <mat-header-cell *matHeaderCellDef style="text-align: center;"> End Date </mat-header-cell>
+          <mat-cell *matCellDef="let data;let i =index" style="text-align: center;">
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker2" placeholder="End Date">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </mat-cell>
+        </ng-container>
+  
+        <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns1;"></mat-row>
+      </mat-table> -->
+      <form [formGroup]="PlanningForm">
+        <div class="row">
+          <div class="col-sm-3">
+            <mat-form-field>
+              <input matInput required placeholder="Quantity" [(ngModel)]="model.Quantity" #quantity
+                (focusout)="checkQuantity(model.Quantity)" formControlName="quantity" required>
+              <mat-error *ngIf="PlanningForm.get('quantity').invalid">This is required field</mat-error>
+            </mat-form-field>
+          </div>
+  
+          <div class="col-sm-3">
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker1" placeholder="Delivery Date" (focus)="picker1.open()"
+                [(ngModel)]="model.Deliverydate" formControlName="deliveryDate">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+              <mat-error *ngIf="PlanningForm.get('deliveryDate').invalid">This is required field</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-3">
+            <pre style="margin-top: 11px;">Total Quantity:  {{totalQuantity}}</pre>
+          </div>
+  
+          <div class="col-sm-3">
+            <pre style="margin-top: 11px;">UnPlanned:{{totalQuantity - grantQty}}</pre>
+          </div>
         </div>
+        <table class="table table-bordered table-hover">
+          <thead style="background-color: #303f9f ;color:white">
+            <tr>
+              <th scope="col">Fields</th>
+              <th scope="col">Start Date</th>
+              <th scope="col">End Date</th>
+            </tr>
+          </thead>
+  
+          <tbody>
+            <tr>
+              <th scope="row">Order Acknowledgement</th>
 
-        <div class="col-sm-3">
-          <mat-form-field>
-            <input matInput [matDatepicker]="picker1" placeholder="Delivery Date" (focus)="picker1.open()"
-              [(ngModel)]="model.deliveryDate" formControlName="deliveryDate">
-            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker #picker1></mat-datepicker>
-            <mat-error *ngIf="PlanningForm.get('deliveryDate').invalid">This is required field</mat-error>
-          </mat-form-field>
+              <td>
+                <mat-form-field> <input matInput [matDatepicker]="picker11" placeholder="start Date"
+                    (focus)="picker11.open()" [(ngModel)]="model.OrdAckSdate" formControlName="ordAckSdate">
+                  <mat-datepicker-toggle matSuffix [for]="picker11"></mat-datepicker-toggle>
+                  <mat-datepicker #picker11></mat-datepicker>
+                  <mat-error *ngIf="PlanningForm.get('ordAckSdate').invalid">This is required field</mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field> <input matInput [matDatepicker]="picker12" placeholder="end Date"
+                    (focus)="picker12.open()" [(ngModel)]="model.OrdAckEdate" formControlName="ordAckEdate">
+                  <mat-datepicker-toggle matSuffix [for]="picker12"></mat-datepicker-toggle>
+                  <mat-datepicker #picker12></mat-datepicker>
+                  <mat-error *ngIf="PlanningForm.get('ordAckEdate').invalid">This is required field</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Material in Flow</th>
+              <td>
+                <mat-form-field> <input matInput [matDatepicker]="picker13" placeholder="start Date"
+                    (focus)="picker13.open()" [(ngModel)]="model.MatInFlowSdate" formControlName="matInFlowSdate">
+                  <mat-datepicker-toggle matSuffix [for]="picker13"></mat-datepicker-toggle>
+                  <mat-datepicker #picker13></mat-datepicker>
+                  <mat-error *ngIf="PlanningForm.get('matInFlowSdate').invalid">This is required field</mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field> <input matInput [matDatepicker]="picker14" placeholder="end Date"
+                    (focus)="picker14.open()" [(ngModel)]="model.MatInFlowEdate" formControlName="matInFlowEdate">
+                  <mat-datepicker-toggle matSuffix [for]="picker14"></mat-datepicker-toggle>
+                  <mat-datepicker #picker14></mat-datepicker>
+                  <mat-error *ngIf="PlanningForm.get('matInFlowEdate').invalid">This is required field</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Material Recieve in Factory</th>
+              <td>
+                <mat-form-field> <input matInput [matDatepicker]="picker15" placeholder="start Date"
+                    (focus)="picker15.open()" [(ngModel)]="model.MatRcvInFacSdate" formControlName="matRcvInFacSdate">
+                  <mat-datepicker-toggle matSuffix [for]="picker15"></mat-datepicker-toggle>
+                  <mat-datepicker #picker15></mat-datepicker>
+                  <mat-error *ngIf="PlanningForm.get('matRcvInFacSdate').invalid">This is required field</mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field> <input matInput [matDatepicker]="picker16" placeholder="end Date"
+                    (focus)="picker16.open()" [(ngModel)]="model.MatRcvInFacEdate" formControlName="matRcvInFacEdate">
+                  <mat-datepicker-toggle matSuffix [for]="picker16"></mat-datepicker-toggle>
+                  <mat-datepicker #picker16></mat-datepicker>
+                  <mat-error *ngIf="PlanningForm.get('matRcvInFacEdate').invalid">This is required field</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Assemble</th>
+              <td>
+                <mat-form-field> <input matInput [matDatepicker]="picker17" placeholder="start Date"
+                    (focus)="picker17.open()" [(ngModel)]="model.AssembleSdate" formControlName="assembleSdate">
+                  <mat-datepicker-toggle matSuffix [for]="picker17"></mat-datepicker-toggle>
+                  <mat-datepicker #picker17></mat-datepicker>
+                  <mat-error *ngIf="PlanningForm.get('assembleSdate').invalid">This is required field</mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field> <input matInput [matDatepicker]="picker18" placeholder="end Date"
+                    (focus)="picker18.open()" [(ngModel)]="model.AssembleEdate" formControlName="assembleEdate">
+                  <mat-datepicker-toggle matSuffix [for]="picker18"></mat-datepicker-toggle>
+                  <mat-datepicker #picker18></mat-datepicker>
+                  <mat-error *ngIf="PlanningForm.get('assembleEdate').invalid">This is required field</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Hydraulic Test</th>
+              <td>
+                <mat-form-field> <input matInput [matDatepicker]="picker19" placeholder="start Date"
+                    (focus)="picker19.open()" [(ngModel)]="model.HydrolicSdate" formControlName="hydrolicSdate">
+                  <mat-datepicker-toggle matSuffix [for]="picker19"></mat-datepicker-toggle>
+                  <mat-datepicker #picker19></mat-datepicker>
+                  <mat-error *ngIf="PlanningForm.get('hydrolicSdate').invalid">This is required field</mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field> <input matInput [matDatepicker]="picker20" placeholder="end Date"
+                    (focus)="picker20.open()" [(ngModel)]="model.HydrolicEdate" formControlName="hydrolicEdate">
+                  <mat-datepicker-toggle matSuffix [for]="picker20"></mat-datepicker-toggle>
+                  <mat-datepicker #picker20></mat-datepicker>
+                  <mat-error *ngIf="PlanningForm.get('hydrolicEdate').invalid">This is required field</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Perfect Test</th>
+              <td>
+                <mat-form-field> <input matInput [matDatepicker]="picker21" placeholder="start Date"
+                    (focus)="picker21.open()" [(ngModel)]="model.PerfTestSdate" formControlName="perfTestSdate">
+                  <mat-datepicker-toggle matSuffix [for]="picker21"></mat-datepicker-toggle>
+                  <mat-datepicker #picker21></mat-datepicker>
+                  <mat-error *ngIf="PlanningForm.get('perfTestSdate').invalid">This is required field</mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field> <input matInput [matDatepicker]="picker22" placeholder="end Date"
+                    (focus)="picker22.open()" [(ngModel)]="model.PerfTestEdate" formControlName="perfTestEdate">
+                  <mat-datepicker-toggle matSuffix [for]="picker22"></mat-datepicker-toggle>
+                  <mat-datepicker #picker22></mat-datepicker>
+                  <mat-error *ngIf="PlanningForm.get('perfTestEdate').invalid">This is required field</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Painting</th>
+              <td>
+                <mat-form-field> <input matInput [matDatepicker]="picker23" placeholder="start Date"
+                    (focus)="picker23.open()" [(ngModel)]="model.PaintingSdate" formControlName="paintingSdate">
+                  <mat-datepicker-toggle matSuffix [for]="picker23"></mat-datepicker-toggle>
+                  <mat-datepicker #picker23></mat-datepicker>
+                  <mat-error *ngIf="PlanningForm.get('paintingSdate').invalid">This is required field</mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field> <input matInput [matDatepicker]="picker24" placeholder="end Date"
+                    (focus)="picker24.open()" [(ngModel)]="model.PaintingEdate" formControlName="paintingEdate">
+                  <mat-datepicker-toggle matSuffix [for]="picker24"></mat-datepicker-toggle>
+                  <mat-datepicker #picker24></mat-datepicker>
+                  <mat-error *ngIf="PlanningForm.get('paintingEdate').invalid">This is required field</mat-error>
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Final Inspection</th>
+              <td>
+                <mat-form-field> <input matInput [matDatepicker]="picker25" placeholder="start Date"
+                    (focus)="picker25.open()" [(ngModel)]="model.FinalInspSdate" formControlName="finalInspSdate">
+                  <mat-datepicker-toggle matSuffix [for]="picker25"></mat-datepicker-toggle>
+                  <mat-datepicker #picker25></mat-datepicker>
+                  <mat-error *ngIf="PlanningForm.get('finalInspSdate').invalid">This is required field</mat-error>
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field> <input matInput [matDatepicker]="picker26" placeholder="end Date"
+                    (focus)="picker26.open()" [(ngModel)]="model.FinalInspEdate" formControlName="finalInspEdate">
+                  <mat-datepicker-toggle matSuffix [for]="picker26"></mat-datepicker-toggle>
+                  <mat-datepicker #picker26></mat-datepicker>
+                  <mat-error *ngIf="PlanningForm.get('finalInspEdate').invalid">This is required field</mat-error>
+  
+                </mat-form-field>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Packing</th>
+              <td>
+                <mat-form-field> <input matInput [matDatepicker]="picker27" placeholder="start Date"
+                    (focus)="picker27.open()" [(ngModel)]="model.PackingSdate" formControlName="packingSdate">
+                  <mat-datepicker-toggle matSuffix [for]="picker27"></mat-datepicker-toggle>
+                  <mat-datepicker #picker27></mat-datepicker>
+                  <mat-error *ngIf="PlanningForm.get('packingSdate').invalid">This is required field</mat-error>
+  
+                </mat-form-field>
+              </td>
+              <td>
+                <mat-form-field> <input matInput [matDatepicker]="picker28" placeholder="end Date"
+                    (focus)="picker28.open()" [(ngModel)]="model.PackingEdate" formControlName="packingEdate">
+                  <mat-datepicker-toggle matSuffix [for]="picker28"></mat-datepicker-toggle>
+                  <mat-datepicker #picker28></mat-datepicker>
+                  <mat-error *ngIf="PlanningForm.get('packingEdate').invalid">This is required field</mat-error>
+  
+                </mat-form-field>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="margin-right: 5px;margin-bottom: 5px;text-align: end">
+          <button (click)="savePlanningDetails()" mat-raised-button color="warn">
+            <span *ngIf="!isEditing">Save</span>  <span *ngIf="isEditing">Update</span>
+          </button>
+          <div></div>
         </div>
-        <div class="col-sm-3">
-          <pre style="margin-top: 11px;">Total Quantity:  {{totalQuantity}}</pre>
-        </div>
-
-        <div class="col-sm-3">
-          <pre style="margin-top: 11px;">UnPlanned:{{totalQuantity - getGrandquantity()}}</pre>
-        </div>
-      </div>
-      <table class="table table-bordered table-hover">
-        <thead style="background-color: #303f9f ;color:white">
-          <tr>
-            <th scope="col">Fields</th>
-            <th scope="col">Start Date</th>
-            <th scope="col">End Date</th>
+      </form>
+    </div>
+  
+  </ng-template>
+  
+  
+  <ng-template #PlanViewDialog>
+    <div class="w-100">
+      <mat-toolbar color="primary" fxLayoutAlign="space-between center">
+        <span> Planning Details </span>
+        <button mat-icon-button>
+          <mat-icon (click)="closeDialog()">close
+          </mat-icon>
+        </button>
+      </mat-toolbar>
+    </div>
+    <div class="p-24">
+        <p>Quantity: <span style="font-size: 12px;font-weight: 300">{{planningView.Quantity}} </span></p>
+        <p>DeliveryDate: <span style="font-size: 12px;font-weight: 300">{{planningView.Deliverydate| date: 'dd/MM/yyyy'}} </span></p>
+      <!-- <p>Order Ack Start Date: <span style="font-size: 12px;font-weight: 300">{{planningView.OrdAckSdate| date: 'dd/MM/yyyy'}} </span></p>
+     
+      <p>Order Ack End Date: <span style="font-size: 12px;font-weight: 300"> {{planningView.OrdAckEdate| date: 'dd/MM/yyyy'}}</span></p>
+     
+      <p>Order Date: <span style="font-size: 12px;font-weight: 300"> {{planningView.MatRcvInFacSdate| date: 'dd/MM/yyyy'}} </span></p>
+      <p>Ack Date: <span style="font-size: 12px;font-weight: 300"> {{planningView.MatRcvInFacEdate| date: 'dd/MM/yyyy'}} </span></p>
+      <p>Assigned to: <span style="font-size: 12px;font-weight: 300"> {{planningView.AssignedTo}} </span></p>
+      <p>Order Takenby: <span style="font-size: 12px;font-weight: 300"> {{planningView.OrderTakenBy}} </span></p>
+      <p>Order Status: <span style="font-size: 12px;font-weight: 300"> {{planningView.OrderStatus}} </span></p> -->
+    
+  
+      <table class="table table-bordered">
+        <thead>
+          <tr style="font-weight: 600">
+            <th>Field</th>
+            <th>Start Date</th>
+            <th>End Date</th>
           </tr>
         </thead>
-
         <tbody>
           <tr>
-            <th scope="row">Order Acknowledgement</th>
-            <td>
-              <mat-form-field> <input matInput [matDatepicker]="picker11" placeholder="start Date"
-                  (focus)="picker11.open()" [(ngModel)]="model.ordAckSdate" formControlName="ordAckSdate">
-                <mat-datepicker-toggle matSuffix [for]="picker11"></mat-datepicker-toggle>
-                <mat-datepicker #picker11></mat-datepicker>
-                <mat-error *ngIf="PlanningForm.get('ordAckSdate').invalid">This is required field</mat-error>
-              </mat-form-field>
-            </td>
-            <td>
-              <mat-form-field> <input matInput [matDatepicker]="picker12" placeholder="end Date"
-                  (focus)="picker12.open()" [(ngModel)]="model.ordAckEdate" formControlName="ordAckEdate">
-                <mat-datepicker-toggle matSuffix [for]="picker12"></mat-datepicker-toggle>
-                <mat-datepicker #picker12></mat-datepicker>
-                <mat-error *ngIf="PlanningForm.get('ordAckEdate').invalid">This is required field</mat-error>
-              </mat-form-field>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">Material in Flow</th>
-            <td>
-              <mat-form-field> <input matInput [matDatepicker]="picker13" placeholder="start Date"
-                  (focus)="picker13.open()" [(ngModel)]="model.matInFlowSdate" formControlName="matInFlowSdate">
-                <mat-datepicker-toggle matSuffix [for]="picker13"></mat-datepicker-toggle>
-                <mat-datepicker #picker13></mat-datepicker>
-                <mat-error *ngIf="PlanningForm.get('matInFlowSdate').invalid">This is required field</mat-error>
-              </mat-form-field>
-            </td>
-            <td>
-              <mat-form-field> <input matInput [matDatepicker]="picker14" placeholder="end Date"
-                  (focus)="picker14.open()" [(ngModel)]="model.matInFlowEdate" formControlName="matInFlowEdate">
-                <mat-datepicker-toggle matSuffix [for]="picker14"></mat-datepicker-toggle>
-                <mat-datepicker #picker14></mat-datepicker>
-                <mat-error *ngIf="PlanningForm.get('matInFlowEdate').invalid">This is required field</mat-error>
-              </mat-form-field>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">Material Recieve in Factory</th>
-            <td>
-              <mat-form-field> <input matInput [matDatepicker]="picker15" placeholder="start Date"
-                  (focus)="picker15.open()" [(ngModel)]="model.matRcvInFacSdate" formControlName="matRcvInFacSdate">
-                <mat-datepicker-toggle matSuffix [for]="picker15"></mat-datepicker-toggle>
-                <mat-datepicker #picker15></mat-datepicker>
-                <mat-error *ngIf="PlanningForm.get('matRcvInFacSdate').invalid">This is required field</mat-error>
-              </mat-form-field>
-            </td>
-            <td>
-              <mat-form-field> <input matInput [matDatepicker]="picker16" placeholder="end Date"
-                  (focus)="picker16.open()" [(ngModel)]="model.matRcvInFacEdate" formControlName="matRcvInFacEdate">
-                <mat-datepicker-toggle matSuffix [for]="picker16"></mat-datepicker-toggle>
-                <mat-datepicker #picker16></mat-datepicker>
-                <mat-error *ngIf="PlanningForm.get('matRcvInFacEdate').invalid">This is required field</mat-error>
-              </mat-form-field>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">Assemble</th>
-            <td>
-              <mat-form-field> <input matInput [matDatepicker]="picker17" placeholder="start Date"
-                  (focus)="picker17.open()" [(ngModel)]="model.assembleSdate" formControlName="assembleSdate">
-                <mat-datepicker-toggle matSuffix [for]="picker17"></mat-datepicker-toggle>
-                <mat-datepicker #picker17></mat-datepicker>
-                <mat-error *ngIf="PlanningForm.get('assembleSdate').invalid">This is required field</mat-error>
-              </mat-form-field>
-            </td>
-            <td>
-              <mat-form-field> <input matInput [matDatepicker]="picker18" placeholder="end Date"
-                  (focus)="picker18.open()" [(ngModel)]="model.assembleEdate" formControlName="assembleEdate">
-                <mat-datepicker-toggle matSuffix [for]="picker18"></mat-datepicker-toggle>
-                <mat-datepicker #picker18></mat-datepicker>
-                <mat-error *ngIf="PlanningForm.get('assembleEdate').invalid">This is required field</mat-error>
-              </mat-form-field>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">Hydraulic Test</th>
-            <td>
-              <mat-form-field> <input matInput [matDatepicker]="picker19" placeholder="start Date"
-                  (focus)="picker19.open()" [(ngModel)]="model.hydrolicSdate" formControlName="hydrolicSdate">
-                <mat-datepicker-toggle matSuffix [for]="picker19"></mat-datepicker-toggle>
-                <mat-datepicker #picker19></mat-datepicker>
-                <mat-error *ngIf="PlanningForm.get('hydrolicSdate').invalid">This is required field</mat-error>
-              </mat-form-field>
-            </td>
-            <td>
-              <mat-form-field> <input matInput [matDatepicker]="picker20" placeholder="end Date"
-                  (focus)="picker20.open()" [(ngModel)]="model.hydrolicEdate" formControlName="hydrolicEdate">
-                <mat-datepicker-toggle matSuffix [for]="picker20"></mat-datepicker-toggle>
-                <mat-datepicker #picker20></mat-datepicker>
-                <mat-error *ngIf="PlanningForm.get('hydrolicEdate').invalid">This is required field</mat-error>
-              </mat-form-field>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">Perfect Test</th>
-            <td>
-              <mat-form-field> <input matInput [matDatepicker]="picker21" placeholder="start Date"
-                  (focus)="picker21.open()" [(ngModel)]="model.perfTestSdate" formControlName="perfTestSdate">
-                <mat-datepicker-toggle matSuffix [for]="picker21"></mat-datepicker-toggle>
-                <mat-datepicker #picker21></mat-datepicker>
-                <mat-error *ngIf="PlanningForm.get('perfTestSdate').invalid">This is required field</mat-error>
-              </mat-form-field>
-            </td>
-            <td>
-              <mat-form-field> <input matInput [matDatepicker]="picker22" placeholder="end Date"
-                  (focus)="picker22.open()" [(ngModel)]="model.perfTestEdate" formControlName="perfTestEdate">
-                <mat-datepicker-toggle matSuffix [for]="picker22"></mat-datepicker-toggle>
-                <mat-datepicker #picker22></mat-datepicker>
-                <mat-error *ngIf="PlanningForm.get('perfTestEdate').invalid">This is required field</mat-error>
-              </mat-form-field>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">Painting</th>
-            <td>
-              <mat-form-field> <input matInput [matDatepicker]="picker23" placeholder="start Date"
-                  (focus)="picker23.open()" [(ngModel)]="model.paintingSdate" formControlName="paintingSdate">
-                <mat-datepicker-toggle matSuffix [for]="picker23"></mat-datepicker-toggle>
-                <mat-datepicker #picker23></mat-datepicker>
-                <mat-error *ngIf="PlanningForm.get('paintingSdate').invalid">This is required field</mat-error>
-              </mat-form-field>
-            </td>
-            <td>
-              <mat-form-field> <input matInput [matDatepicker]="picker24" placeholder="end Date"
-                  (focus)="picker24.open()" [(ngModel)]="model.paintingEdate" formControlName="paintingEdate">
-                <mat-datepicker-toggle matSuffix [for]="picker24"></mat-datepicker-toggle>
-                <mat-datepicker #picker24></mat-datepicker>
-                <mat-error *ngIf="PlanningForm.get('paintingEdate').invalid">This is required field</mat-error>
-              </mat-form-field>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">Final Inspection</th>
-            <td>
-              <mat-form-field> <input matInput [matDatepicker]="picker25" placeholder="start Date"
-                  (focus)="picker25.open()" [(ngModel)]="model.finalInspSdate" formControlName="finalInspSdate">
-                <mat-datepicker-toggle matSuffix [for]="picker25"></mat-datepicker-toggle>
-                <mat-datepicker #picker25></mat-datepicker>
-                <mat-error *ngIf="PlanningForm.get('finalInspSdate').invalid">This is required field</mat-error>
-              </mat-form-field>
-            </td>
-            <td>
-              <mat-form-field> <input matInput [matDatepicker]="picker26" placeholder="end Date"
-                  (focus)="picker26.open()" [(ngModel)]="model.finalInspEdate" formControlName="finalInspEdate">
-                <mat-datepicker-toggle matSuffix [for]="picker26"></mat-datepicker-toggle>
-                <mat-datepicker #picker26></mat-datepicker>
-                <mat-error *ngIf="PlanningForm.get('finalInspEdate').invalid">This is required field</mat-error>
-
-              </mat-form-field>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">Packing</th>
-            <td>
-              <mat-form-field> <input matInput [matDatepicker]="picker27" placeholder="start Date"
-                  (focus)="picker27.open()" [(ngModel)]="model.packingSdate" formControlName="packingSdate">
-                <mat-datepicker-toggle matSuffix [for]="picker27"></mat-datepicker-toggle>
-                <mat-datepicker #picker27></mat-datepicker>
-                <mat-error *ngIf="PlanningForm.get('packingSdate').invalid">This is required field</mat-error>
-
-              </mat-form-field>
-            </td>
-            <td>
-              <mat-form-field> <input matInput [matDatepicker]="picker28" placeholder="end Date"
-                  (focus)="picker28.open()" [(ngModel)]="model.packingEdate" formControlName="packingEdate">
-                <mat-datepicker-toggle matSuffix [for]="picker28"></mat-datepicker-toggle>
-                <mat-datepicker #picker28></mat-datepicker>
-                <mat-error *ngIf="PlanningForm.get('packingEdate').invalid">This is required field</mat-error>
-
-              </mat-form-field>
-            </td>
+        <td style="font-size: 14px;">Order Acknowledgement</td>
+        <td style="font-size: 14px;">{{planningView.OrdAckSdate| date: 'dd/MM/yyyy'}}</td>  
+        <td style="font-size: 14px;">{{planningView.OrdAckEdate| date: 'dd/MM/yyyy'}}</td>
           </tr>
         </tbody>
+        <tbody>
+            <tr>
+          <td style="font-size: 14px;">Material in Flow</td>
+          <td style="font-size: 14px;">{{planningView.MatInFlowSdate| date: 'dd/MM/yyyy'}}</td>  
+          <td style="font-size: 14px;">{{planningView.MatInFlowEdate| date: 'dd/MM/yyyy'}}</td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+          <td style="font-size: 14px;">Material Recieve in Factory</td>
+          <td style="font-size: 14px;">{{planningView.MatRcvInFacSdate| date: 'dd/MM/yyyy'}}</td>  
+          <td style="font-size: 14px;">{{planningView.MatRcvInFacEdate| date: 'dd/MM/yyyy'}}</td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+          <td style="font-size: 14px;">Assemble</td>
+          <td style="font-size: 14px;">{{planningView.AssembleSdate| date: 'dd/MM/yyyy'}}</td>  
+          <td style="font-size: 14px;">{{planningView.AssembleEdate| date: 'dd/MM/yyyy'}}</td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+          <td style="font-size: 14px;">Hydraulic Test</td>
+          <td style="font-size: 14px;">{{planningView.HydrolicSdate| date: 'dd/MM/yyyy'}}</td>  
+          <td style="font-size: 14px;">{{planningView.HydrolicEdate| date: 'dd/MM/yyyy'}}</td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+          <td style="font-size: 14px;">Perfect Test</td>
+          <td style="font-size: 14px;">{{planningView.PerfTestSdate| date: 'dd/MM/yyyy'}}</td>  
+          <td style="font-size: 14px;">{{planningView.PerfTestEdate| date: 'dd/MM/yyyy'}}</td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+          <td style="font-size: 14px;">Painting</td>
+          <td style="font-size: 14px;">{{planningView.PaintingSdate| date: 'dd/MM/yyyy'}}</td>  
+          <td style="font-size: 14px;">{{planningView.PaintingEdate| date: 'dd/MM/yyyy'}}</td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+          <td style="font-size: 14px;">Final Inspection</td>
+          <td style="font-size: 14px;">{{planningView.FinalInspSdate| date: 'dd/MM/yyyy'}}</td>  
+          <td style="font-size: 14px;">{{planningView.FinalInspEdate| date: 'dd/MM/yyyy'}}</td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr>
+          <td style="font-size: 14px;">Packing</td>
+          <td style="font-size: 14px;">{{planningView.PackingSdate| date: 'dd/MM/yyyy'}}</td>  
+          <td style="font-size: 14px;">{{planningView.PackingEdate| date: 'dd/MM/yyyy'}}</td>
+            </tr>
+        </tbody>
+              
       </table>
-      <div style="margin-right: 5px;margin-bottom: 5px;text-align: end">
-        <button (click)="savePlanningDetails()" mat-raised-button color="warn">Save</button>
-        <div></div>
-      </div>
-    </form>
-  </div>
-
-</ng-template>
-
-
-<ng-template #PlanViewDialog>
-  <div class="w-100">
-    <mat-toolbar color="primary" fxLayoutAlign="space-between center">
-      <span> #{{planningView.OrderID}}-Sales Order Details </span>
-      <button mat-icon-button>
-        <mat-icon (click)="closeDialog()">close
-        </mat-icon>
-      </button>
-    </mat-toolbar>
-  </div>
-  <div class="p-24">
-      <p>Quantity: <span style="font-size: 12px;font-weight: 300">{{planningView.Quantity}} </span></p>
-      <p>DeliveryDate: <span style="font-size: 12px;font-weight: 300">{{planningView.DeliveryDate| date: 'dd/MM/yyyy'}} </span></p>
-    <p>Order Ack Start Date: <span style="font-size: 12px;font-weight: 300">{{planningView.OrdAckSdate| date: 'dd/MM/yyyy'}} </span></p>
-   
-    <p>Order Ack End Date: <span style="font-size: 12px;font-weight: 300"> {{planningView.OrdAckEdate| date: 'dd/MM/yyyy'}}</span></p>
-   
-    <p>Order Date: <span style="font-size: 12px;font-weight: 300"> {{planningView.MatRcvInFacSdate| date: 'dd/MM/yyyy'}} </span></p>
-    <p>Ack Date: <span style="font-size: 12px;font-weight: 300"> {{planningView.MatRcvInFacEdate| date: 'dd/MM/yyyy'}} </span></p>
-    <p>Assigned to: <span style="font-size: 12px;font-weight: 300"> {{planningView.AssignedTo}} </span></p>
-    <p>Order Takenby: <span style="font-size: 12px;font-weight: 300"> {{planningView.OrderTakenBy}} </span></p>
-    <p>Order Status: <span style="font-size: 12px;font-weight: 300"> {{planningView.OrderStatus}} </span></p>
   
-
-    <table class="table table-bordered">
-      <thead>
-        <tr style="font-weight: 600">
-          <th style="width:2%">S.No</th>
-          <th>Product Name</th>
-          <th>Quantity</th>
-          <th>UOM</th>
-          <th>HSN Code</th>
-          <th>Rate</th>
-          <th>Tax</th>
-          <th>Amount</th>
-          <th>TotalAmount</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let so of OrderFormDetail;let i=index">
-          <td style="width:2%;font-size: 14px;">{{i+1}}</td>
-      <td style="font-size: 14px;">{{so.prdName}}</td>  
-      <td style="font-size: 14px;">{{so.Quantity}}</td>  
-      <td style="font-size: 14px;">{{so.UOMName}}</td>  
-      <td style="font-size: 14px;">{{so.HSNCode}}</td>  
-      <td style="font-size: 14px;">{{so.Rate}}</td>  
-      <td style="font-size: 14px;">{{so.Tax}}</td>  
-      <td style="font-size: 14px;">{{so.Amount}}</td>  
-      <td style="font-size: 14px;">{{so.T_Amount}}</td>  
-        </tr>
-      </tbody>
-    </table>
-
-  </div>
-      <div style="margin-right: 5px;margin-bottom: 5px;text-align: end">
-        <button (click)="closeDialog()" mat-raised-button color="warn">Close</button>
- <div></div>     
     </div>
-</ng-template>
+        <div style="margin-right: 5px;margin-bottom: 5px;text-align: end">
+          <button (click)="closeDialog()" mat-raised-button color="warn">Close</button>
+   <div></div>     
+      </div>
+  </ng-template>
