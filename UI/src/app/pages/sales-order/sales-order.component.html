@@ -90,7 +90,7 @@
 
                     <ng-container matColumnDef="SName">
                       <mat-header-cell *matHeaderCellDef mat-sort-header class="inFilter color-white">
-                        SupplierName
+                        Customer Name
                         <button mat-icon-button [matMenuTriggerFor]="SupplierNameFilter" class="Filter-icon-WT">
                           <mat-icon aria-label="Area Filter">keyboard_arrow_down</mat-icon>
                         </button>
@@ -98,7 +98,7 @@
                           xPosition="before">
                           <div class="info-wrapper menuPop">
                             <mat-form-field class="w-100 input-label">
-                              <input matInput placeholder="Search SupplierName." (click)="handleClick($event)"
+                              <input matInput placeholder="Search Customer Name." (click)="handleClick($event)"
                                 (keyup)="applyFilter($event.target.value)" autofocus>
                             </mat-form-field>
                             <div class="ta-w">
