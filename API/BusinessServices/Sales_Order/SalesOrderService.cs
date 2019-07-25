@@ -206,6 +206,30 @@ namespace BusinessServices
             return SalesCode;
 
         }
+
+
+
+        public bool Createsupply(supply obj)
+        {
+            bool res = false;
+            SqlCommand cmd = new SqlCommand("sp_savesupplyAgainstPlanning");
+            cmd.CommandType = CommandType.StoredProcedure;
+            // cmd.Parameters.AddWithValue("@p_CODE", obj.CODE);
+            cmd.Parameters.AddWithValue("@p_orderSetId", obj.orderSetId);
+            cmd.Parameters.AddWithValue("@p_plannedQty", obj.Quantity);
+            cmd.Parameters.AddWithValue("@p_suppliedQuantity", obj.SuppliedQuantity);
+            cmd.Parameters.AddWithValue("@p_createdBy", obj.createdBy);
+            cmd.Parameters.AddWithValue("@p_modifiedBy", obj.modifiedBy);
+            var locMax = _unitOfWork.DbLayer.ExecuteNonQuery(cmd);
+            if (locMax != Int32.MaxValue)
+            {
+                res = true;
+            }
+            return res;
+        }
+
+
+
     }
 }
 

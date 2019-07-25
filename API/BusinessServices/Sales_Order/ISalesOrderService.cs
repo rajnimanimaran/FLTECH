@@ -17,5 +17,6 @@ public interface ISalesOrderService
         IEnumerable<SalesOrderPlanEntity> GetSalesOrderPlan(int SO_RefID);
         bool InsertSalesOrderPlan(SalesOrderPlanEntity obj);
         bool UpdateSalesOrderPlan(int OrderSetID, SalesOrderPlanEntity obj);
+        bool Createsupply(supply obj);
     }
 }

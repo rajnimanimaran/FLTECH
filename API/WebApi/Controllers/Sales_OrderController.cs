@@ -176,6 +176,22 @@ namespace WebApi.Controllers
         //}
 
 
+        [HttpPost]
+        [Route("InsertSupplyPlan")]
+        public bool supplyplan(supply supply)
+        {
+            try
+            {
+                return _SalesOrderService.Createsupply(supply);
+            }
+            catch (Exception ex)
+            {
+                throw new ApiDataException(1000, "Category Not Found", HttpStatusCode.NotFound);
+            }
+        }
+
+
+
     }
 
 }

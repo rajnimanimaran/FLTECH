@@ -61,6 +61,7 @@ namespace BusinessEntities
         public int cost_price { get; set; }
         public string StatusName { get; set; }
         public string employeeName { get; set; }
+        public int? suppliedQuantity { get; set; }
 
     }
 
@@ -111,6 +112,7 @@ namespace BusinessEntities
         public int SOID { get; set; }
         public int SORefID { get; set; }
         public int Quantity { get; set; }
+        public int SuppliedQuantity { get; set; }
         public DateTime Deliverydate { get; set; }
         public DateTime OrdAckSdate { get; set; }
         public DateTime OrdAckEdate { get; set; }
@@ -143,4 +145,16 @@ namespace BusinessEntities
     }
 
 
+    public class supply
+    {
+        //public int supplyagnstPlanId { get; set; }
+        public int orderSetId { get; set; }
+        public int Quantity { get; set; }
+        public int SuppliedQuantity { get; set; }
+        public string createdDate { get; set; }
+        public string modifiedDate { get; set; }
+        public int createdBy { get; set; }
+        public int modifiedBy { get; set; }
     }
+
+}
