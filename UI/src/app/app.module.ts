@@ -51,6 +51,7 @@ import { WorkorderService } from './shared/services/workorder.service';
 import { QualityAuditComponent } from './pages/quality-audit/quality-audit.component';
 import { QualityAuditService } from './shared/services/quality-audit.service';
 import { PlanningComponent } from './pages/planning/planning.component';
+import { SupplyAgainstPlanningComponent } from './pages/supply-against-planning/supply-against-planning.component';
 // import { StateServicesService } from './shared/services/adminstrator/location/state.service';
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { PlanningComponent } from './pages/planning/planning.component';
     QualityControlComponent,
     SpinnerComponent,
     QualityAuditComponent,
-    PlanningComponent
+    PlanningComponent,
+    SupplyAgainstPlanningComponent
   ],
   imports: [
     BrowserModule,
@@ -93,6 +95,7 @@ import { PlanningComponent } from './pages/planning/planning.component';
     { provide: MAT_DATE_LOCALE, useValue: "en-us" },
     { provide: DateAdapter, useClass: AppDateAdapter },
     { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }],
+    entryComponents:[PlanningComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

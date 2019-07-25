@@ -1,0 +1,96 @@
+<div class="container-fluid bg1">
+  <div class="row">
+    <div class="col-sm-12" id="responsive">
+      <div class="new" id="center">
+        <div class="card" id="mainbox" [class.fullScreen]="screenfullClicked">
+          <div *ngIf='!show' class="card-body">
+            <div class="row">
+              <div class="col-sm-6" style="padding-top:5px">
+                <h6 id="h1">Supplier Against
+                  <span id="h1s">Planning</span>
+                </h6>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-3">
+                <mat-form-field class="example-full-width">
+                  <mat-select placeholder="Sales Order Code" (selectionChange)="getSoDetails($event)">
+                    <mat-option *ngFor="let c of codeList" [value]="c">{{c.CODE}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-3">
+                <mat-form-field class="example-full-width">
+                  <mat-select placeholder="Product Name" (selectionChange)="showPlan($event)">
+                    <mat-option *ngFor="let c of OrderFormDetail" [value]="c">{{c.prdName}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-sm-4">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="table-container mat-elevation-z2">
+                  <mat-table class="color-table" #table [dataSource]="dataSource1" matSort>
+                    <ng-container matColumnDef="S.No">
+                      <mat-header-cell *matHeaderCellDef style="text-align: center;"> Planned ID </mat-header-cell>
+                      <mat-cell *matCellDef="let ele;let i =index" style="text-align: center;"> {{ele.OrderSetID}}
+                      </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="ProductName">
+                      <mat-header-cell *matHeaderCellDef style="text-align: center;"> Planned Quantity
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let ele;let i =index" style="text-align: center;">
+                        {{ele.Quantity}}
+                      </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="quantity">
+                      <mat-header-cell *matHeaderCellDef style="text-align: center;"> Supplied Quantity
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let ele;let i =index" style="text-align: center;">
+                        {{ele.SuppliedQuantity}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="UOM">
+                      <mat-header-cell *matHeaderCellDef style="text-align: center;"> Quantity To be Supplied
+                      </mat-header-cell>
+                      <mat-cell *matCellDef="let ele;let i =index" style="text-align: center;">
+                        <mat-form-field>
+                          <input matInput #quantity required [(ngModel)]="ele.SuppliedQty"
+                            (blur)="checkSupplyQty(ele,quantity.value)" placeholder="Enter Quantity(Nos)"
+                            name="Quantity" required>
+                        </mat-form-field>
+                      </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="action">
+                      <mat-header-cell *matHeaderCellDef class="color-white">Action</mat-header-cell>
+                      <mat-cell *matCellDef="let ele">
+                        <button mat-icon-button color="warn" (click)="saveSupply(ele)" matTooltip="Save this Supply"
+                          [matTooltipClass]="'custom-tip'">
+                          <i class="material-icons" style="color: rgb(50, 50, 206)">
+                            save
+                          </i>
+                        </button>
+                      </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="displayedgridcolumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedgridcolumns;let i=index">
+                    </mat-row>
+                  </mat-table>
+
+                  <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+                    [showFirstLastButtons]="true">
+                  </mat-paginator>
+                </div>
+                <app-spinner [showProgress]='!isLoading'></app-spinner>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

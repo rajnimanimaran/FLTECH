@@ -18,6 +18,7 @@ import { WoJobworkComponent } from './pages/Workorder master/wo-jobwork/wo-jobwo
 import { QualityControlComponent } from './pages/master/quality-control/quality-control.component';
 import { QualityAuditComponent } from './pages/quality-audit/quality-audit.component';
 import { PlanningComponent } from './pages/planning/planning.component';
+import { SupplyAgainstPlanningComponent } from './pages/supply-against-planning/supply-against-planning.component';
 
 const routes: Routes = [{
   path: '',
@@ -89,9 +90,14 @@ const routes: Routes = [{
     {
       path:'qualityaudit',
       component:QualityAuditComponent,
-    },{
+    },
+    {
       path:'planning',
       component:PlanningComponent,
+    },
+    {
+      path:'supplyplanning',
+      component:SupplyAgainstPlanningComponent,
     }
   ]
 }

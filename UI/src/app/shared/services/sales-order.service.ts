@@ -39,6 +39,18 @@ export class SalesOrderMasterService {
     const dataUrl = API_URL + "SalesOrder/InsertSalesOrderPlan";
     return this._http.post<any>(dataUrl, data)
   }
+
+savesupply(data){
+  const dataUrl = API_URL + "SalesOrder/InsertSupplyPlan";
+  return this._http.post<any>(dataUrl, data)
+}
+  
+  updateSOPlanning(data): Observable<any> {
+    debugger;
+    const dataUrl = API_URL + "SalesOrder/UpdateSalesOrderPlan";
+    return this._http.post<any>(dataUrl, data)
+  }
+
   // getSalesOrderDetailsbyCode(orderid){
   //   const dataUrl = API_URL + "SalesOrder/GetSalesCode/";
   //   return this._http.post<any>(dataUrl,orderid);
